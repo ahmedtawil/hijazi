@@ -8,7 +8,7 @@ const {isAuthenticatedUser} = require('./middlewares/auth')
 const expressLayouts = require('express-ejs-layouts');
 
 
-
+const customerRoute = require('./components/customer/route')
 const dashboardRoute = require('./components/Dashboard/route')
 
 const app = express();
@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.use('/', dashboardRoute)
+app.use('/', customerRoute)
 
 
 
