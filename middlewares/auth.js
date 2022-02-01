@@ -1,4 +1,4 @@
-//const Employee = require('../models/Employee')
+const Employee = require('../models/Employee')
 
 const jwt = require("jsonwebtoken");
 const ErrorHandler = require("../utils/errorHandler");
