@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 const { errors } = require('../data/staticData');
+const jwt = require('jsonwebtoken')
+
 const employeeSchema = new Schema({
     name: {
         type: String,
@@ -19,5 +21,9 @@ const employeeSchema = new Schema({
         default: new Date()
     },
 })
-
+employeeSchema.methods.getJwtToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_TIME
+    });
+}
 module.exports = mongoose.model('Employee', employeeSchema)
