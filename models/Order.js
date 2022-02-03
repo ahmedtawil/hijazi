@@ -10,49 +10,67 @@ const orderSchema = new Schema({
     },
     customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
     items: [{
-        _id: { type: Schema.Types.ObjectId, ref: 'Item' },
-        serialNumber: {
-            type: String,
-            required: [true, errors.name.ar],
+        _id: {
+            type: Schema.Types.ObjectId, ref: 'Item',
+            required: true
         },
-        title: {
+        color: {
             type: String,
-            required: [true, errors.name.ar],
-        },
-        manualPrice: {
-            type: Boolean
+            required: true
         },
         price: {
-            type: Number
+            type: Number,
+            required: true
         },
-        manualSize: {
-            type: Boolean
+        qty: {
+            type: Number,
+            required: true
         },
-        size: {
-            type: Number
+        totalAmount: {
+            type: Number,
+            required: true
         },
-        unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true },
-        createdAt: {
-            type: Date,
-            default: new Date()
+        width: {
+            size: {
+                type: Number,
+                required: true
+            },
+            unit: {
+                type: String,
+                required: true
+            }
+        },
+        height: {
+            size: {
+                type: Number,
+                required: true
+            },
+            unit: {
+                type: String,
+                required: true
+            }
         },
     }]
     ,
     discount: {
-        type: Number
+        type: Number,
+        required: true
     },
     totalAmount: {
-        type: Number
+        type: Number,
+        required: true
     },
     finalAmount: {
-        type: Number
+        type: Number,
+        required: true
     },
     paidAmount: {
-        type: Number
+        type: Number,
+        required: true
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
     createdBy: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
 

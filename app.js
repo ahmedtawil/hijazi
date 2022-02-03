@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/' , authRoute)
-app.use(isAuthenticatedUser)
+//app.use(isAuthenticatedUser)
 app.use(async(req, res, next) => {
     res.locals.user = req.user
     next()

@@ -1,31 +1,23 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 const itemSchema = new Schema({
-
-    serialNumber: {
-        type: String,
-        required: [true, errors.name.ar],
-    },
     title: {
         type: String,
-        required: [true, errors.name.ar],
+        required:true
     },
-    manualPrice: {
-        type: Boolean
-    },
-    price: {
-        type: Number
-    },
-    manualSize: {
-        type: Boolean
-    },
-    size: {
-        type: Number
-    },
-    unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true },
+    colors:[{
+        color:{
+            type:String,
+            required:true
+        },
+        image:{
+            type:String,
+            required:true
+        }
+    }],   
     createdAt: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
 })
 module.exports = mongoose.model('Item', itemSchema)

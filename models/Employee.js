@@ -18,7 +18,7 @@ const employeeSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
 })
 employeeSchema.methods.getJwtToken = function () {
