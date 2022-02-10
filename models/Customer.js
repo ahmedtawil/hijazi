@@ -68,6 +68,9 @@ const customerSchema = new Schema({
         type: Number,
         default:0
     },
+    isConfirm:{
+        type:Boolean
+    },
     createdAt: {
         type: Date,
         default: Date.now

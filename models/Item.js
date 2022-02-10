@@ -14,7 +14,11 @@ const itemSchema = new Schema({
             type:String,
             required:true
         }
-    }],   
+    }],
+    isUsed:{
+        type:Boolean,
+        default:true
+    },   
     createdAt: {
         type: Date,
         default: Date.now

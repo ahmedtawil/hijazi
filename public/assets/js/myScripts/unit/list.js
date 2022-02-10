@@ -44,9 +44,7 @@ var KTunitsList = function () {
 
 
             columns: [
-                { data: 'title' },
-                { data: 'smallTitle' },
-                {
+                { data: 'title' },                {
                     data: 'weight',
                 },
                 

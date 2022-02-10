@@ -1,34 +1,5 @@
-<!--begin::Toolbar-->
-<div class="toolbar py-2" id="kt_toolbar">
-    <!--begin::Container-->
-    <div id="kt_toolbar_container" class="container-fluid d-flex align-items-center">
-        <!--begin::Page title-->
-        <div class="flex-grow-1 flex-shrink-0 me-5">
-            <!--begin::Page title-->
-            <div class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-                <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">الزبائن
-                    <!--begin::Separator-->
-                    <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
-                    <!--end::Separator-->
-                    <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">الرئيسية</small>
-                    <!--end::Description-->
-                </h1>
-                <!--end::Title-->
-            </div>
-            <!--end::Page title-->
-        </div>
-        <!--end::Page title-->
 
 
-    </div>
-    <!--end::Container-->
-</div>
-<!--end::Toolbar-->
-
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content" root-customer-id="<%= customer._id %>">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
         <!--begin::Layout-->
@@ -53,7 +24,7 @@
                             <!--end::Name-->
                             <!--begin::Position-->
                             <div class="fs-5 fw-bold text-muted mb-6">
-                                <%= (customer.type=='wholesaler' ) ? 'زبون جملة' : 'زبون عادي' %>
+                                زبون
                             </div>
                             <!--end::Position-->
                             <!--begin::Info-->
@@ -80,7 +51,7 @@
                                 <!--end::Stats-->
                                 <!--begin::Stats-->
                                 <div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
-                                    <div class="fs-4 fw-bolder text-gray-700 text-center"><%= customer.debt %></div>
+                                    <div class="fs-4 fw-bolder text-gray-700 text-center">500</div>
                                     <div class="fw-bold text-muted">المستحق</div>
                                 </div>
                                 <!--end::Stats-->
@@ -175,7 +146,7 @@
                     <!--begin:::Tab item-->
                     <li class="nav-item">
                         <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
-                            href="#kt_customer_view_overview_tab">نظرة عاملة</a>
+                            href="#kt_customer_view_overview_tab">نظرة عامة</a>
                     </li>
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
@@ -251,7 +222,7 @@
                                             </svg>
                                         </span>
                                         <!--end::Svg Icon-->
-                                        <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5"><%= customer.debt %> ₪</div>
+                                        <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">50 ₪</div>
                                         <div class="fw-bold text-gray-400">الرصيد المستحق</div>
                                     </div>
                                     <!--end::Body-->
@@ -633,8 +604,6 @@
         <!--end::Modals-->
     </div>
     <!--end::Container-->
-</div>
-<!--end::Content-->
 
 <!--begin::Global Javascript Bundle(used by all pages)-->
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
@@ -648,6 +617,6 @@
 <script>
     const customerID = $('#kt_content').attr('root-customer-id')
 </script>
-<script src="/assets/js/myScripts/customer/profile/purchases.js"></script>
-<script src="/assets/js/myScripts/customer/profile/invoices.js"></script>
+<!-- <script src="/assets/js/myScripts/customer/profile/purchases.js"></script>
+<script src="/assets/js/myScripts/customer/profile/invoices.js"></script> -->
 <script src="/assets/js/myScripts/customer/profile/payBatch.js"></script>

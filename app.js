@@ -8,12 +8,13 @@ const {isAuthenticatedUser} = require('./middlewares/auth')
 const expressLayouts = require('express-ejs-layouts');
 
 
+const product = require('./components/product/route')
+const unit = require('./components/unit/route')
 const customerRoute = require('./components/customer/route')
 const dashboardRoute = require('./components/Dashboard/route')
 const authRoute = require('./components/auth/route')
 
 const app = express();
-
 app.use(expressLayouts)
 app.use(express.json())
 app.use(cookieParser())
@@ -26,9 +27,10 @@ app.use(async(req, res, next) => {
     res.locals.user = req.user
     next()
 })
-
+app.use('/', unit)
 app.use('/', dashboardRoute)
 app.use('/', customerRoute)
+app.use('/', product)
 
 
 

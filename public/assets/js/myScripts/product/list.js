@@ -44,27 +44,24 @@ var KTproductsList = function () {
 
 
             columns: [
-                { data: 'name' },
-                
+                { data: 'title' },
                 {
-                    data: 'serialNumber',
-                },
-                {
-                    data: 'productCategory',
+                    data: 'colors',
+                    render: function (data, type, doc) {
+                        let span
+                        return data.map(color => {
+                            console.log(color.image);
+                            return span = `<span class="badge badge-light-info fw-bolder m-25px"> اللون: ${color.color}</span>` + `<span class="symbol-label">
+                    <a href="${color.image}"target="_blank" class="symbol symbol-50px m-10px">
+                        <span class="symbol-label m-10px" style="background-image:url(${color.image});"></span>
+                    </a>
+                    </span>`
 
-                    render:function (data, type, doc) {
-                        return `<span class="badge badge-light fw-bolder my-2">${doc.productCategory.name}</span>`
+
+                        })
+
                     }
                 },
-                {
-                    data: 'price',
-
-                     render:function (data, type, doc) {
-                         return `<span class="badge badge-light-success fw-bolder my-2">${(typeof data == 'undefined')? `سعر يدوي` : `${data} شيكل`}</span>`
-                     }
-                },
-
-                
                 {
                     data: '',
                     render: function (data, type, doc) {

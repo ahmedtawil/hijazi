@@ -55,6 +55,7 @@ exports.getCustomersPage = catchAsyncErrors(async (req, res) => {
 
 exports.newCustomer = catchAsyncErrors(async (req, res) => {
   const data = req.body
+  data.isConfirm = true ;
   const newCustomer = new Customer(data)
   await newCustomer.validate()
   newCustomer.save()
