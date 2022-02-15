@@ -1,0 +1,304 @@
+<!--begin::Container-->
+<div class="container-xxl" id="kt_content_container">
+    <div class="row g-6 g-xl-9">
+
+        <% items.forEach(item=> { %>
+            <!--begin::Col-->
+            <div class="col-md-6 col-xl-4">
+                <!--begin::Card-->
+                <a href="#" id="<%= item._id %>"
+                    style="background-image: url('https://www.w3schools.com/howto/img_snow.jpg'); height: 100%;" <%#
+                    item.colors[1].image %>
+                    class="card border-hover-primary img-fluid">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 pt-9">
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <span class="badge badge-light-primary fw-bolder me-auto px-4 py-3">
+                                <%= item.title %>
+                            </span>
+                        </div>
+                        <!--end::Card toolbar-->
+                        <!--begin::Card Title-->
+                        <div class="card-title m-0">
+                            <!--begin::Avatar-->
+                            <button class="btn btn-sm btn-light addToCart" itemid="<%= item._id %>">
+                                <span class="mr-3">إضافة</span>
+                            </button>
+                            <!--end::Avatar-->
+                        </div>
+                        <!--end::Car Title-->
+
+                    </div>
+                    <!--end:: Card header-->
+                    <!--begin:: Card body-->
+                    <div class="card-body p-9 align-bottom" style="margin-top: 90%;">
+                        <!--begin::Colors-->
+                        <div colorGroupid="<%= item._id %>" class="symbol-group symbol-hover align-bottom">
+                            <!--begin::Color-->
+                            <% item.colors.forEach(color=> { %>
+                                <div class="symbol symbol-35px symbol-circle color" colorId="<%= color.color._id %>"
+                                    active=false itemid="<%= item._id %>" data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="<%= color.color.name %>">
+                                    <img alt="Pic" src="<%= color.image %>">
+                                </div>
+                                <% }) %>
+
+                                    <!--end::Color-->
+
+                        </div>
+                        <!--end::Colors-->
+                    </div>
+                    <!--end:: Card body-->
+                </a>
+                <!--end::Card-->
+            </div>
+            <!--end::Col-->
+            <% }) %>
+    </div>
+
+    <!--begin::Modal - Cart - Add-->
+    <div class="modal fade" id="kt_modal_add_item_to_cart" tabindex="-1" aria-hidden="true">
+
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-800px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Form-->
+                <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#"
+                    id="kt_modal_add_item_to_cart_form" data-kt-redirect="/item/new" autocomplete="off"
+                    enctype="multipart/form-data">
+                    <!--begin::Modal header-->
+                    <div class="modal-header" id="kt_modal_add_item_to_cart_header">
+                        <!--begin::Modal title-->
+                        <h2 class="fw-bolder">إضافة المنتج إلى الطلبية <div class="badge badge-light-success"
+                                id="modal_item_title"></div>
+                        </h2>
+
+                        <!--end::Modal title-->
+                        <!--begin::Close-->
+                        <div id="kt_modal_add_item_to_cart_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                        transform="rotate(45 7.41422 6)" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Modal header-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body py-10 px-lg-17">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <!--begin::Scroll-->
+                                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_item_to_cart_scroll"
+                                    data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                                    data-kt-scroll-max-height="auto"
+                                    data-kt-scroll-dependencies="#kt_modal_add_item_to_cart_header"
+                                    data-kt-scroll-wrappers="#kt_modal_add_item_to_cart_scroll"
+                                    data-kt-scroll-offset="300px" style="max-height: 647px;">
+
+
+
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-bold mb-2">اللون</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select name="color" id="color" class="form-select form-select-solid fw-bolder"
+                                            data-kt-select2="true" data-placeholder="أختر..." data-hide-search="true">
+
+                                        </select>
+
+                                        <!--end::Input-->
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-bold mb-2">المقاس</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select name="size" id="size" class="form-select form-select-solid fw-bolder calcPrice"
+                                            data-kt-select2="true" data-placeholder="أختر..." data-hide-search="true">
+                                            <option value="9">9 فجة</option>
+                                            <option value="10.5">10.5 فجة</option>
+                                            <option value="12">12 فجة</option>
+                                            <option value="14">14 فجة</option>
+                                            <option value="16">16 فجة</option>
+                                            <option value="18">18 فجة</option>
+                                            <option value="20">20 فجة</option>                            
+                                            <option value="custom">مقاس مخصص</option>
+                                        </select>
+
+                                        <!--end::Input-->
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+
+                                    <div class="d-none" id="custom_size_block">
+                                        <label class="required fs-6 fw-bold mb-2">الطول</label>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <input type="number" value="0" min="0"
+                                                        class="form-control form-control-solid calcPrice" name="height_size"
+                                                        id="height_size">
+
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <select name="height_unit" id="height_unit"
+                                                        class="form-select form-select-solid fw-bolder calcPrice"
+                                                        data-kt-select2="true" data-placeholder="أختر..."
+                                                        data-hide-search="true">
+                                                        <% unitsArr.forEach(unit=> { %>
+                                                            <option value="<%= units[unit.toUpperCase()].en %>">
+                                                                 <%= units[unit.toUpperCase()].ar %> 
+                                                            </option>
+                                                        <% }) %>
+                                                    </select>
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="required fs-6 fw-bold mb-2">العرض</label>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <input type="number" class="form-control form-control-solid calcPrice"
+                                                        value="0" min="0" name="width_size" id="width_size">
+
+
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <select name="width_unit" id="width_unit"
+                                                        class="form-select form-select-solid fw-bolder calcPrice"
+                                                        data-kt-select2="true" data-placeholder="أختر..."
+                                                        data-hide-search="true">
+                                                        <% unitsArr.forEach(unit=> { %>
+                                                            <option value="<%= units[unit.toUpperCase()].en %>">
+                                                                 <%= units[unit.toUpperCase()].ar %> 
+                                                            </option>
+                                                        <% }) %>
+
+                                                    </select>
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end::Scroll-->
+                            </div>
+                            <div class="col-md-7">
+                                <div id="image-contanier" class="text-center">
+                                    <img id="modal_color_img" src="/assets/media/illustrations/sigma-1/9.png" alt=""
+                                        class="rounded" />
+                                    <span id="price" class="price badge badge-light-primary fw-bolder me-auto px-4 py-3">
+                                        101
+                                    </span>
+                                </div>
+                                <style>
+                                    img {
+                                        width: 100%;
+                                        height: 300px;
+                                        object-fit: cover !important;
+                                    }
+
+                                    #image-contanier {
+                                        position: relative;
+                                        display: inline-block;
+                                        text-align: center;
+                                        width: 100%;
+                                        height: 300px;
+                                    }
+
+                                    .price {
+                                        position: absolute;
+                                        top: 15px;
+                                        right: 15px;
+                                        width: 90px;
+                                        height: 30px;
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Modal body-->
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                        <!--begin::Button-->
+                        <button type="reset" id="kt_modal_add_item_to_cart_cancel"
+                            class="btn btn-light me-3">إلغاء</button>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_modal_add_item_to_cart_submit" class="btn btn-primary">
+                            <span class="indicator-label">حفظ</span>
+                            <span class="indicator-progress">الرجاء الإنتظار...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        <!--end::Button-->
+                    </div>
+                    <!--end::Modal footer-->
+                    <div></div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+    <!--end::Modals-->
+
+</div>
+<!--begin::Javascript-->
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Page Vendors Javascript(used by this page)-->
+<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="/assets/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
+<!--end::Page Vendors Javascript-->
+<!--begin::Page Custom Javascript(used by this page)-->
+<script src="/assets/js/myScripts/item/list.js"></script>
+<script src="/assets/js/myScripts/item/cart/add.js"></script>
+
+<!--end::Page Custom Javascript-->
+<!--end::Javascript-->

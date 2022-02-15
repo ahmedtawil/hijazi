@@ -1,0 +1,261 @@
+<!--begin::Container-->
+<div class="container-xxl" id="kt_content_container">
+    <!--begin::Form-->
+    <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row"
+        data-kt-redirect="../../demo9/dist/apps/ecommerce/sales/listing.html">
+        <!--begin::Aside column-->
+        <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
+            <!--begin::Order details-->
+            <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>تفاصيل الطلب</h2>
+                    </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="d-flex flex-column gap-10">
+                        <!--begin::Input group-->
+                        <div class="fv-row">
+                            <!--begin::Label-->
+                            <label class="form-label">معرف الطلب</label>
+                            <!--end::Label-->
+                            <!--begin::Auto-generated ID-->
+                            <div class="fw-bolder fs-3">#12566</div>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row">
+                            <!--begin::Label-->
+                            <label class="required form-label">طريقة الدفع</label>
+                            <!--end::Label-->
+                            <!--begin::Select2-->
+                            <select class="form-select mb-2" data-control="select2" data-hide-search="true"
+                                data-placeholder="اختار" name="payment_method"
+                                id="kt_ecommerce_edit_order_payment">
+                                <option></option>
+                                <option value="cod">كاش</option>
+                                <option value="visa">دفعة</option>
+                               
+                            </select>
+                            <!--end::Select2-->
+                           
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                </div>
+                <!--end::Card header-->
+            </div>
+            <!--end::Order details-->
+        </div>
+        <!--end::Aside column-->
+        <!--begin::Main column-->
+        <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
+            <!--begin::Order details-->
+            <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>أختر المنتج</h2>
+                    </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="d-flex flex-column gap-10">
+                        <!--begin::Input group-->
+                        <div>
+                            <!--begin::Label-->
+                            <label class="form-label">أضف المنتجات إلى الطلبية</label>
+                            <!--end::Label-->
+                            <!--begin::Selected products-->
+                            <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2 border border-dashed rounded pt-3 pb-1 px-2 mb-5 mh-300px overflow-scroll"
+                                id="kt_ecommerce_edit_order_selected_products">
+                                <!--begin::Empty message-->
+                                <span class="w-100 text-muted">حدد المنتجات المطلوبة بالضغط على زر التحديد.</span>
+                                <!--end::Empty message-->
+                            </div>
+                            <!--begin::Selected products-->
+                            <!--begin::Total price-->
+                            <div class="fw-bolder fs-4">إجمالي التكلفة : 
+                                <span id="kt_ecommerce_edit_order_total_price">0.00</span>
+                            </div>
+                            <!--end::Total price-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Separator-->
+                        <div class="separator"></div>
+                        <!--end::Separator-->
+                        <!--begin::Search products-->
+                        <div class="d-flex align-items-center position-relative mb-n7">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                            <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                        transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                    <path
+                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <input type="text" data-kt-ecommerce-edit-order-filter="search"
+                                class="form-control form-control-solid w-100 w-lg-50 ps-14"
+                                placeholder="البحث عن المنتجات" />
+                        </div>
+                        <!--end::Search products-->
+                        <!--begin::Table-->
+                        <table class="table align-middle table-row-dashed fs-6 gy-5"
+                            id="kt_ecommerce_edit_order_product_table">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="w-25px pe-2"></th>
+                                    <th class="min-w-200px">المنتجات</th>
+                                    <th class="min-w-100px text-end pe-5">Qty Remaining</th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody class="fw-bold text-gray-600">
+                               
+                                <!--begin::Table row-->
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" />
+                                        </div>
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::Product=-->
+                                    <td>
+                                        <div class="d-flex align-items-center"
+                                            data-kt-ecommerce-edit-order-filter="product"
+                                            data-kt-ecommerce-edit-order-id="product_29">
+                                            <!--begin::Thumbnail-->
+                                            <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                class="symbol symbol-50px">
+                                                <span class="symbol-label"
+                                                    style="background-image:url(assets/media//stock/ecommerce/29.gif);"></span>
+                                            </a>
+                                            <!--end::Thumbnail-->
+                                            <div class="ms-5">
+                                                <!--begin::Title-->
+                                                <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                    class="text-gray-800 text-hover-primary fs-5 fw-bolder">Product
+                                                    29</a>
+                                                <!--end::Title-->
+                                                <!--begin::Price-->
+                                                <div class="fw-bold fs-7">Price: $
+                                                    <span data-kt-ecommerce-edit-order-filter="price">227.00</span>
+                                                </div>
+                                                <!--end::Price-->
+                                                <!--begin::SKU-->
+                                                <div class="text-muted fs-7">SKU: 04434001</div>
+                                                <!--end::SKU-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--end::Product=-->
+                                    <!--begin::Qty=-->
+                                    <td class="text-end pe-5" data-order="48">
+                                        <span class="fw-bolder ms-3">48</span>
+                                    </td>
+                                    <!--end::Qty=-->
+                                </tr>
+                                <!--end::Table row-->
+                                <!--begin::Table row-->
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" />
+                                        </div>
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::Product=-->
+                                    <td>
+                                        <div class="d-flex align-items-center"
+                                            data-kt-ecommerce-edit-order-filter="product"
+                                            data-kt-ecommerce-edit-order-id="product_30">
+                                            <!--begin::Thumbnail-->
+                                            <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                class="symbol symbol-50px">
+                                                <span class="symbol-label"
+                                                    style="background-image:url(assets/media//stock/ecommerce/30.gif);"></span>
+                                            </a>
+                                            <!--end::Thumbnail-->
+                                            <div class="ms-5">
+                                                <!--begin::Title-->
+                                                <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                    class="text-gray-800 text-hover-primary fs-5 fw-bolder">Product
+                                                    30</a>
+                                                <!--end::Title-->
+                                                <!--begin::Price-->
+                                                <div class="fw-bold fs-7">Price: $
+                                                    <span data-kt-ecommerce-edit-order-filter="price">189.00</span>
+                                                </div>
+                                                <!--end::Price-->
+                                                <!--begin::SKU-->
+                                                <div class="text-muted fs-7">SKU: 04420003</div>
+                                                <!--end::SKU-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--end::Product=-->
+                                    <!--begin::Qty=-->
+                                    <td class="text-end pe-5" data-order="3">
+                                        <span class="badge badge-light-warning">Low stock</span>
+                                        <span class="fw-bolder text-warning ms-3">3</span>
+                                    </td>
+                                    <!--end::Qty=-->
+                                </tr>
+                                <!--end::Table row-->
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                </div>
+                <!--end::Card header-->
+            </div>
+            <!--end::Order details-->
+
+            <div class="d-flex justify-content-end">
+                <!--begin::Button-->
+                <a href="../../demo9/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_edit_order_cancel"
+                    class="btn btn-light me-5">Cancel</a>
+                <!--end::Button-->
+                <!--begin::Button-->
+                <button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
+                    <span class="indicator-label">Save Changes</span>
+                    <span class="indicator-progress">Please wait...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+                <!--end::Button-->
+            </div>
+        </div>
+        <!--end::Main column-->
+    </form>
+    <!--end::Form-->
+</div>
+<!--end::Container-->
+
+<!--begin::Javascript-->
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Page Vendors Javascript(used by this page)-->
+<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="/assets/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
+<!--end::Page Vendors Javascript-->
+<!--begin::Page Custom Javascript(used by this page)-->
+<script src="/assets/js/myScripts/order/save.js"></script>
+<!--end::Page Custom Javascript-->
+<!--end::Javascript-->

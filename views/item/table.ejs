@@ -1,6 +1,3 @@
-
-
-
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -25,7 +22,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <input type="text" data-kt-product-table-filter="search"
+                            <input type="text" data-kt-item-table-filter="search"
                                 class="form-control form-control-solid w-250px ps-15" placeholder="البحث عن منتج.." />
                         </div>
                         <!--end::Search-->
@@ -34,7 +31,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-product-table-toolbar="base">
+                        <div class="d-flex justify-content-end" data-kt-item-table-toolbar="base">
 
                             <!--begin::Filter-->
                             <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
@@ -62,7 +59,7 @@
                                 <div class="separator border-gray-200"></div>
                                 <!--end::Separator-->
                                 <!--begin::Content-->
-                                <div class="px-7 py-5" data-kt-product-table-filter="form">
+                                <div class="px-7 py-5" data-kt-item-table-filter="form">
                                     <!--begin::Input group-->
                                     <div class="mb-6">
                                         <label class="form-label fs-6 fw-bold">التاريخ</label>
@@ -86,10 +83,10 @@
                                         <button type="reset"
                                             class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
                                             data-kt-menu-dismiss="true"
-                                            data-kt-product-table-filter="reset">مسح</button>
+                                            data-kt-item-table-filter="reset">مسح</button>
                                         <button type="submit" class="btn btn-primary fw-bold px-6"
                                             data-kt-menu-dismiss="true"
-                                            data-kt-product-table-filter="filter">تطبيق</button>
+                                            data-kt-item-table-filter="filter">تطبيق</button>
                                     </div>
                                     <!--end::Actions-->
                                 </div>
@@ -99,10 +96,10 @@
                             <!--end::Filter-->
 
 
-                            <!--begin::Add product-->
+                            <!--begin::Add item-->
                             <a type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_add_product" href="#" id="addProduct">منتج جديد</a>
-                            <!--end::Add product-->
+                                data-bs-target="#kt_modal_add_item" href="#" id="addProduct">منتج جديد</a>
+                            <!--end::Add item-->
                         </div>
                         <!--end::Toolbar-->
 
@@ -114,7 +111,7 @@
                 <div class="card-body pt-0">
                     <!--begin::Table-->
                     <table class="text-center table align-middle table-row-dashed fs-6 gy-5"
-                        id="kt_productCategories_table">
+                        id="kt_items_table">
                         <!--begin::Table head-->
                         <thead>
                             <!--begin::Table row-->
@@ -136,7 +133,7 @@
             <!--begin::Modals-->
             
             <!--begin::Modal - Customers - Add-->
-            <div class="modal fade" id="kt_modal_add_product" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="kt_modal_add_item" tabindex="-1" aria-hidden="true">
 
                 <!--begin::Modal dialog-->
                 <div class="modal-dialog modal-dialog-centered mw-450px">
@@ -144,14 +141,14 @@
                     <div class="modal-content">
                         <!--begin::Form-->
                         <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#"
-                            id="kt_modal_add_product_form" data-kt-redirect="/product/new" autocomplete="off" enctype="multipart/form-data">
+                            id="kt_modal_add_item_form" data-kt-redirect="/item/new" autocomplete="off" enctype="multipart/form-data">
                             <!--begin::Modal header-->
-                            <div class="modal-header" id="kt_modal_add_product_header">
+                            <div class="modal-header" id="kt_modal_add_item_header">
                                 <!--begin::Modal title-->
                                 <h2 class="fw-bolder">منتج جديد</h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
-                                <div id="kt_modal_add_product_close"
+                                <div id="kt_modal_add_item_close"
                                     class="btn btn-icon btn-sm btn-active-icon-primary">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
@@ -171,11 +168,11 @@
                             <!--begin::Modal body-->
                             <div class="modal-body py-10 px-lg-17">
                                 <!--begin::Scroll-->
-                                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll" data-kt-scroll="true"
+                                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_item_scroll" data-kt-scroll="true"
                                     data-kt-scroll-activate="{default: false, lg: true}"
                                     data-kt-scroll-max-height="auto"
-                                    data-kt-scroll-dependencies="#kt_modal_add_product_header"
-                                    data-kt-scroll-wrappers="#kt_modal_add_product_scroll" data-kt-scroll-offset="300px"
+                                    data-kt-scroll-dependencies="#kt_modal_add_item_header"
+                                    data-kt-scroll-wrappers="#kt_modal_add_item_scroll" data-kt-scroll-offset="300px"
                                     style="max-height: 647px;">
 
 
@@ -195,11 +192,19 @@
                                         <label class="required fs-6 fw-bold mb-2">اللون</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="color" id="color" min="1">
+                                        <select name="color" id="color"
+                                            class="form-select form-select-solid fw-bolder" data-kt-select2="true"
+                                            data-placeholder="أختر..." data-hide-search="true">
+                                            <% colors.forEach(color=> { %>
+                                               <option value="<%= color._id%>"><%= color.name%></option>
+
+                                            <% }) %>
+                                        </select>
+
                                         <!--end::Input-->
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
+
                                     <label class="required fs-6 fw-bold mb-2">الصورة</label>
                                     <div class="card-body text-center pt-0">
                                         <!--begin::Image input-->
@@ -234,10 +239,10 @@
                                     <a href="#" class="btn btn-primary btn-hover-rise mb-5" id="addImage">اضافة اللون</a>
                                     <!--end::Button-->
                                     <div>
-                                        <!--begin::Selected products-->
-                                        <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2 border border-dashed rounded pt-3 pb-1 px-2 mb-5 mh-300px overflow-scroll" id="kt_ecommerce_edit_order_selected_products">
+                                        <!--begin::Selected items-->
+                                        <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2 border border-dashed rounded pt-3 pb-1 px-2 mb-5 mh-300px overflow-scroll" id="kt_ecommerce_edit_order_selected_items">
                                             <!--begin::Empty message-->
-                                            <span class="w-100 text-muted d-none">Select one or more products from the list below by ticking the checkbox.</span>
+                                            <span class="w-100 text-muted d-none">Select one or more items from the list below by ticking the checkbox.</span>
                                             <!--end::Empty message-->
                                             </div>
                                     </div>
@@ -249,11 +254,11 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" id="kt_modal_add_product_cancel"
+                                <button type="reset" id="kt_modal_add_item_cancel"
                                     class="btn btn-light me-3">إلغاء</button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" id="kt_modal_add_product_submit" class="btn btn-primary">
+                                <button type="submit" id="kt_modal_add_item_submit" class="btn btn-primary">
                                     <span class="indicator-label">حفظ</span>
                                     <span class="indicator-progress">الرجاء الإنتظار...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -286,8 +291,8 @@
         
 
 <!--begin::Page Custom Javascript(used by this page)-->
-<script src="/assets/js/myScripts/product/list.js"></script>
-<script src="/assets/js/myScripts/product/new.js"></script>
+<script src="/assets/js/myScripts/item/table.js"></script>
+<script src="/assets/js/myScripts/item/new.js"></script>
 
 
 <!--end::Page Custom Javascript-->

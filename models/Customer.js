@@ -52,6 +52,7 @@ const customerSchema = new Schema({
         },
         trim: true
     },
+    cart:[],
     address: {
         type: String,
         required: [true, 'عنوان الزبون مطلوب'],

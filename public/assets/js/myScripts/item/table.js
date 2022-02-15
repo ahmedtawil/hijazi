@@ -3,7 +3,7 @@ let tableQuery = {
 
 }
 // Class definition
-var KTproductsList = function () {
+var KTitemsTable = function () {
     // Define shared variables
     var datatable;
     var filterMonth;
@@ -16,7 +16,7 @@ var KTproductsList = function () {
     }
 
     // Private functions
-    var initproductList = function () {
+    var inititemList = function () {
         // Set date data order
         const tableRows = table.querySelectorAll('tbody tr');
 
@@ -34,8 +34,8 @@ var KTproductsList = function () {
 
 
             "ajax": {
-                url: "/products/data/get",
-                "dataSrc": 'products',
+                url: "/items/data/get",
+                "dataSrc": 'items',
                 "dataFilter": function (res) {
                     dataRes = JSON.parse(res)
                     return res
@@ -108,7 +108,7 @@ var KTproductsList = function () {
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
     var handleSearchDatatable = () => {
-        const filterSearch = document.querySelector('[data-kt-product-table-filter="search"]');
+        const filterSearch = document.querySelector('[data-kt-item-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             tableQuery.search = e.target.value
             datatable.search(JSON.stringify(tableQuery)).draw();
@@ -117,9 +117,9 @@ var KTproductsList = function () {
     // Filter Datatable
     var handleFilter = function () {
         // Select filter options
-        const filterForm = document.querySelector('[data-kt-product-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-product-table-filter="filter"]');
-        const resetButton = filterForm.querySelector('[data-kt-product-table-filter="reset"]');
+        const filterForm = document.querySelector('[data-kt-item-table-filter="form"]');
+        const filterButton = filterForm.querySelector('[data-kt-item-table-filter="filter"]');
+        const resetButton = filterForm.querySelector('[data-kt-item-table-filter="reset"]');
         const selectOptions = filterForm.querySelectorAll('select');
         const datepicker = filterForm.querySelector("[name=date]");
 
@@ -212,10 +212,10 @@ var KTproductsList = function () {
     $(document).on('click', 'body .dropdown-menu', function (e) {
         e.stopPropagation();
     });
-    // Delete product
+    // Delete item
     var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-product-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-item-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click
@@ -225,12 +225,12 @@ var KTproductsList = function () {
                 // Select parent row
                 const parent = e.target.closest('tr');
 
-                // Get product name
-                const productName = parent.querySelectorAll('td')[1].innerText;
+                // Get item name
+                const itemName = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + productName + "?",
+                    text: "Are you sure you want to delete " + itemName + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -243,7 +243,7 @@ var KTproductsList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + productName + "!.",
+                            text: "You have deleted " + itemName + "!.",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -256,7 +256,7 @@ var KTproductsList = function () {
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: productName + " was not deleted.",
+                            text: itemName + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -278,14 +278,14 @@ var KTproductsList = function () {
 
 
         init: function () {
-            table = document.querySelector('#kt_productCategories_table');
+            table = document.querySelector('#kt_items_table');
 
 
             if (!table) {
                 return;
             }
 
-            initproductList();
+            inititemList();
             handleSearchDatatable();
             handleDeleteRows();
             handleFilter();
@@ -297,6 +297,6 @@ var KTproductsList = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTproductsList.init();
+    KTitemsTable.init();
 
 });

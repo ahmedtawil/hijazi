@@ -6,9 +6,10 @@ const itemSchema = new Schema({
         required:true
     },
     colors:[{
+        _id: false,
         color:{
-            type:String,
-            required:true
+            type: Schema.Types.ObjectId, ref: 'Color',
+            required: true
         },
         image:{
             type:String,

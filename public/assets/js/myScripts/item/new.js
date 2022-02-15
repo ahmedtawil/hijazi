@@ -26,24 +26,23 @@ var KTModalProductCategoryAdd = function () {
                     if (status == 'Valid') {
                         
                         e.preventDefault();
-                        var color = document.getElementById("color").value
+                        var color = $('#color option:selected').val()
+                        var colorTitle = $('#color option:selected').text()
                         var image = document.getElementById("image")
                         var imageBlock = document.getElementById("imageBlock")
 
-
                         // Your existing code unmodified...
-                        var iDiv = document.getElementById('kt_ecommerce_edit_order_selected_products');
+                        var iDiv = document.getElementById('kt_ecommerce_edit_order_selected_items');
                         // Now create and append to iDiv
 
                         const [file] = image.files
                         arr.push({
-                            color: color,
+                            color,
                             image: file
                         })
                         var innerDiv = document.createElement('div');
                         innerDiv.className = 'block-2';
-                        innerDiv.innerHTML = `اللون : ${color} الصورة : <img id="blah" width="50" height="50" style="margin:5px" src="${URL.createObjectURL(file)}" alt="your image"/>`;
-                        console.log(arr);
+                        innerDiv.innerHTML = `اللون : ${colorTitle} الصورة : <img id="blah" width="50" height="50" style="margin:5px" src="${URL.createObjectURL(file)}" alt="your image"/>`;
                         document.getElementById("color").value = ''
                         document.getElementById("image").value = ''
                         imageBlock.style = ""
@@ -126,7 +125,7 @@ var KTModalProductCategoryAdd = function () {
             // Revalidate the field when an option is chosen
             validator.revalidateField('country');
         });
-*/
+        */
         // Action buttons
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
@@ -148,12 +147,12 @@ var KTModalProductCategoryAdd = function () {
                         // }
                         formData.append('title', $("input[name=title]").val())
                         
-                        arr.forEach(function(color) {
-                            formData.append("colorTitle" , color.color);
-                            formData.append("image" , color.image);
+                        arr.forEach(function(item) {
+                            formData.append("colorTitle" , item.color);
+                            formData.append("image" , item.image);
                         });
                         $.ajax({
-                            url: "/product/new", 
+                            url: "/item/new", 
                             type: 'POST',
                             data: formData,
                             processData: false,
@@ -173,7 +172,7 @@ var KTModalProductCategoryAdd = function () {
                                         modal.hide();
                                         // Enable submit button after loading
                                         submitButton.disabled = false;
-                                        window.location = '/products/page/get'
+                                        window.location = '/items/page/get'
     
                                     }
                                 })                   
@@ -228,7 +227,7 @@ var KTModalProductCategoryAdd = function () {
                 if (result.value) {
                     form.reset(); // Reset form	
                     modal.hide(); // Hide modal	
-                    window.location = `/products/page/get`
+                    window.location = `/items/page/get`
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "لم يتم إلغاء نموذج الإضافة!",
@@ -261,7 +260,7 @@ var KTModalProductCategoryAdd = function () {
                 if (result.value) {
                     form.reset(); // Reset form	
                     modal.hide(); // Hide modal	
-                    window.location = `/products/page/get`
+                    window.location = `/items/page/get`
 
 
                 } else if (result.dismiss === 'cancel') {
@@ -297,12 +296,12 @@ var KTModalProductCategoryAdd = function () {
         // Public functions
         init: function () {
             // Elements
-            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_product'));
+            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_item'));
 
-            form = document.querySelector('#kt_modal_add_product_form');
-            submitButton = form.querySelector('#kt_modal_add_product_submit');
-            cancelButton = form.querySelector('#kt_modal_add_product_cancel');
-            closeButton = form.querySelector('#kt_modal_add_product_close');
+            form = document.querySelector('#kt_modal_add_item_form');
+            submitButton = form.querySelector('#kt_modal_add_item_submit');
+            cancelButton = form.querySelector('#kt_modal_add_item_cancel');
+            closeButton = form.querySelector('#kt_modal_add_item_close');
 
 
 
