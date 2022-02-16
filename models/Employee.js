@@ -16,6 +16,8 @@ const employeeSchema = new Schema({
         type:String,
         default:'123456789'
     },
+    cart:{},
+
     createdAt: {
         type: Date,
         default: Date.now

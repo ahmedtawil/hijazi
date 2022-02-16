@@ -8,14 +8,14 @@ const {isAuthenticatedUser} = require('./middlewares/auth')
 const expressLayouts = require('express-ejs-layouts');
 
 
+
+const authRoute = require('./components/auth/route')
+const dashboardRoute = require('./components/Dashboard/route')
+const customerRoute = require('./components/customer/route')
 const item = require('./components/item/route')
 const unit = require('./components/unit/route')
 const color = require('./components/color/route')
-
-const customerRoute = require('./components/customer/route')
-const dashboardRoute = require('./components/Dashboard/route')
-const authRoute = require('./components/auth/route')
-
+const cart = require('./components/cart/route')
 
 const util = require('./components/util/route')
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/' , authRoute)
-//app.use(isAuthenticatedUser)
+app.use(isAuthenticatedUser)
 app.use(async(req, res, next) => {
     res.locals.user = req.user
     next()
@@ -39,6 +39,7 @@ app.use('/', color)
 app.use('/', dashboardRoute)
 app.use('/', customerRoute)
 app.use('/', item)
+app.use('/', cart)
 
 
 app.use('/', util)

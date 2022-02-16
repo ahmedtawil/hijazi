@@ -10,11 +10,10 @@ var KTitemsList = function () {
         const itemid = $(this).attr('itemid')
         const colorURL = $(this).find('img').attr('src')
         $(`#${itemid}`).css('background-image' , `url(${colorURL})`)
-        $(this).attr('active' , true)     
         $(`[colorGroupid=${itemid}] .color`).each(function(i, obj) {
-                $(obj).css('border' , '0')
+                $(obj).attr('active' , false) 
         });
-        $(this).css('border' , '1px solid blue')
+        $(this).attr('active' , true)     
     })
     // Public methods
     return {

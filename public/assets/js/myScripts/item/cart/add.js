@@ -106,17 +106,25 @@ var KTModalAddItemToCart = function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
                         const payload = {
-                            name: $("input[name=name]").val(),
-                            formalID: $("input[name=formalID]").val(),
-                            phoneNumber: $("input[name=phoneNumber]").val(),
-                            address: $("input[name=address]").val(),
+                            _id:item._id,
+                            color: $('#color option:selected').val(),
+                            size: $('#size option:selected').val(),
+                            qty: $("input[name=qty]").val(),
+                        }
+                        if(payload.size == 'custom'){
+                            payload.height_size = height_size
+                            payload.height_unit = height_unit
+
+                            payload.width_size = width_size
+                            payload.width_unit = width_unit
+
                         }
 
                         $.post('/cart/add', payload).then(recipientID => {
                             submitButton.removeAttribute('data-kt-indicator');
 
                             Swal.fire({
-                                text: "تم إضافة المورد بنجاح!",
+                                text: "تم إضافة المنتج بنجاح!",
                                 icon: "success",
                                 buttonsStyling: false,
                                 confirmButtonText: "حسنا",
@@ -130,7 +138,7 @@ var KTModalAddItemToCart = function () {
 
                                     // Enable submit button after loading
                                     submitButton.disabled = false;
-                                    window.location = '/suppliers/page/get'
+                                    form.reset()
 
                                 }
                             })
@@ -257,13 +265,19 @@ var KTModalAddItemToCart = function () {
 
     $('.addToCart').on('click', async function (e) {
         e.preventDefault()
+        form.reset()
+        
 
         const itemID = $(this).attr('itemid')
+        console.log(itemID);
         item = await getItemById(itemID)
         let colorId = getSelectedColorId()
         let color = getColorById(colorId)
+        console.log(color);
+
         if (colorId == null) {
             color = item.colors[0]
+            $(`[colorid=${color._id}]`).attr('active' , true)
         }
 
         $('#color').empty()
@@ -276,7 +290,11 @@ var KTModalAddItemToCart = function () {
 
         $('#modal_item_title').text(item.title)
         $('#color').val(color.color._id).change()
+        $("#size").prop('selectedIndex', 0).change();
+        $("#height_unit").prop('selectedIndex', 0).change();
+        $("#width_unit").prop('selectedIndex', 0).change();
         $('#modal_color_img').attr('src', color.image)
+        await triggerPriceCalc()
 
         $('#kt_modal_add_item_to_cart').modal('toggle');
 
@@ -317,6 +335,7 @@ var KTModalAddItemToCart = function () {
     const triggerPriceCalc = async ()=>{
         let price = 0
         const defaultSize = $('#size option:selected').val()
+        const qty = $('#qty').val()
         if(defaultSize != 'custom'){
             price = await calcPrice([{unit:'yard' , size:defaultSize}])
         }else{
@@ -328,9 +347,9 @@ var KTModalAddItemToCart = function () {
              console.log(width_size , width_unit);
              price = await calcPrice([{unit:height_unit , size:height_size} , {unit:width_unit , size:width_size}])
         }
-        $('#price').html(`${price} شيكل`)
+        $('#price').html(`${price} * ${qty} = ${(price*qty).toFixed(2)}`)
     }
-    triggerPriceCalc()
+    
     $('.calcPrice').on('change keyup' , async function (e) {
         await triggerPriceCalc()
     })

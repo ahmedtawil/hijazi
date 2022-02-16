@@ -6,7 +6,6 @@ const moment = require('moment')
 const orderSchema = new Schema({
     serialNumber: {
         type: String,
-        required: [true, errors.name.ar],
     },
     customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
     items: [{
