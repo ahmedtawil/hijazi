@@ -143,8 +143,7 @@
                             <!--end::Label-->
                             <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
-                                data-placeholder="أختر" name="payment_method"
-                                id="order_payment">
+                                data-placeholder="أختر" name="payment_method" id="order_payment">
                                 <option></option>
                                 <option value="cash">كاش</option>
                                 <option value="batch">دفعة</option>
@@ -155,7 +154,7 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Input group-->
-                       
+
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -180,11 +179,14 @@
                         <!--begin::Table head-->
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-175px">Product</th>
-                                <th class="min-w-100px text-end">SKU</th>
-                                <th class="min-w-70px text-end">Qty</th>
-                                <th class="min-w-100px text-end">Unit Price</th>
-                                <th class="min-w-100px text-end">Total</th>
+                                <th class="min-w-100px">المنتج</th>
+                                <th class="min-w-100px text-end">المقاس</th>
+                                <th class="min-w-100px text-end">اللون</th>
+
+                                <th class="min-w-100px text-end">السعر</th>
+                                <th class="min-w-70px text-end">العدد</th>
+                                <th class="min-w-100px text-end">المجموع</th>
+                                <th class="min-w-100px text-end">الخصائص</th>
                             </tr>
                         </thead>
                         <!--end::Table head-->
@@ -215,6 +217,12 @@
                                 <!--begin::SKU-->
                                 <td class="text-end">03673003</td>
                                 <!--end::SKU-->
+                                <!--begin::SKU-->
+                                <td class="text-end">03673003</td>
+                                <!--end::SKU-->
+                                <!--begin::SKU-->
+                                <td class="text-end">03673003</td>
+                                <!--end::SKU-->
                                 <!--begin::Quantity-->
                                 <td class="text-end">2</td>
                                 <!--end::Quantity-->
@@ -222,68 +230,78 @@
                                 <td class="text-end">$120.00</td>
                                 <!--end::Price-->
                                 <!--begin::Total-->
-                                <td class="text-end">$240.00</td>
-                                <!--end::Total-->
-                            </tr>
-                            <tr>
-                                <!--begin::Product-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
-                                            class="symbol symbol-50px">
-                                            <span class="symbol-label"
-                                                style="background-image:url(/assets/media//stock/ecommerce/100.gif);"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <!--begin::Title-->
-                                        <div class="ms-5">
-                                            <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
-                                                class="fw-bolder text-gray-600 text-hover-primary">Footwear</a>
-                                            <div class="fs-7 text-muted">Delivery Date: 12/01/2022</div>
+                                <td class="text-end"><a href="#" class="btn btn-sm btn-light btn-active-light-primary"
+                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                        data-kt-menu-flip="top-end">خيارات
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                        <span class="svg-icon svg-icon-5 m-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                    fill="black"></path>
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </a>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                        data-kt-menu="true">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#"
+                                                class="menu-link px-3">تعديل</a>
+
                                         </div>
-                                        <!--end::Title-->
+                                        <!--end::Menu item-->
+                                         <!--begin::Menu item-->
+                                         <div class="menu-item px-3">
+                                            <a href="#"
+                                                class="menu-link px-3">حذف</a>
+
+                                        </div>
+                                        <!--end::Menu item-->
+
+
                                     </div>
+                                    <!--end::Menu-->
                                 </td>
-                                <!--end::Product-->
-                                <!--begin::SKU-->
-                                <td class="text-end">04229004</td>
-                                <!--end::SKU-->
-                                <!--begin::Quantity-->
-                                <td class="text-end">1</td>
-                                <!--end::Quantity-->
-                                <!--begin::Price-->
-                                <td class="text-end">$24.00</td>
-                                <!--end::Price-->
-                                <!--begin::Total-->
-                                <td class="text-end">$24.00</td>
                                 <!--end::Total-->
+
                             </tr>
                             <!--end::Products-->
                             <!--begin::Subtotal-->
                             <tr>
-                                <td colspan="4" class="text-end">Subtotal</td>
-                                <td class="text-end">$264.00</td>
+                                <td colspan="5" class="text-end">الإجمالي</td>
+                                <td class="text-end">0 شيكل</td>
                             </tr>
                             <!--end::Subtotal-->
                             <!--begin::VAT-->
                             <tr>
-                                <td colspan="4" class="text-end">VAT (0%)</td>
-                                <td class="text-end">$0.00</td>
+                                <td colspan="5" class="text-end">الخصم</td>
+                                <td class="text-end">0 شيكل</td>
                             </tr>
                             <!--end::VAT-->
-                            <!--begin::Shipping-->
-                            <tr>
-                                <td colspan="4" class="text-end">Shipping Rate</td>
-                                <td class="text-end">$5.00</td>
-                            </tr>
-                            <!--end::Shipping-->
-                            <!--begin::Grand total-->
-                            <tr>
-                                <td colspan="4" class="fs-3 text-dark text-end">Grand Total</td>
-                                <td class="text-dark fs-3 fw-boldest text-end">$269.00</td>
+                           
+                             <!--begin::Grand total-->
+                             <tr>
+                                <td colspan="5" class="fs-3 text-dark text-end">مطلوب للدفع</td>
+                                <td class="text-dark fs-3 fw-boldest text-end">0 شيكل</td>
                             </tr>
                             <!--end::Grand total-->
+                            <!--begin::Shipping-->
+                            <tr>
+                                <td colspan="5" class="text-end">المدفوع</td>
+                                <td class="text-end">0 شيكل</td>
+                            </tr>
+                            <!--end::Shipping-->
+                             <!--begin::Shipping-->
+                             <tr>
+                                <td colspan="5" class="text-end">المسترد</td>
+                                <td class="text-end">0 شيكل</td>
+                            </tr>
+                            <!--end::Shipping-->
+                           
                         </tbody>
                         <!--end::Table head-->
                     </table>

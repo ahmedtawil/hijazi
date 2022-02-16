@@ -33,10 +33,10 @@ app.use(async(req, res, next) => {
     res.locals.user = req.user
     next()
 })
+app.use('/', dashboardRoute)
 app.use('/', unit)
 app.use('/', color)
 
-app.use('/', dashboardRoute)
 app.use('/', customerRoute)
 app.use('/', item)
 app.use('/', cart)
@@ -53,11 +53,11 @@ app.use('/', util)
 
 
 
-
+/*
 app.get((req, res, next) => {
     next(new ErrorHandler('dfdf', 404))
 })
-
+*/
 // Middleware to handle errors
 app.use(errorMiddleware);
 
