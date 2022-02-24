@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Customer = require('../../models/Customer')
+const User = require('../../models/User')
 const ErrorHandler = require('../../utils/errorHandler');
 const catchAsyncErrors = require('../../middlewares/catchAsyncErrors');
 

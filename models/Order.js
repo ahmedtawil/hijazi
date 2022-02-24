@@ -71,7 +71,7 @@ const orderSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    createdBy: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 
 })
 orderSchema.pre('save', async function (next) {

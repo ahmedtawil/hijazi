@@ -1410,7 +1410,7 @@ License: For each use you must have a valid license purchased only from above li
 							<div class="d-flex align-items-center py-3 py-lg-0">
 								<!--begin::Item-->
 								<div class="me-3">
-									<a href="/cart/get" class="btn btn-icon btn-custom btn-active-color-primary position-relative" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+									<a href="/cart/page/get" class="btn btn-icon btn-custom btn-active-color-primary position-relative" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 										<!--begin::Svg Icon | path: icons/duotune/general/gen007.svg-->
 										<span class="svg-icon svg-icon-1 svg-icon-white">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1421,7 +1421,7 @@ License: For each use you must have a valid license purchased only from above li
 										</span>
 										<!--end::Svg Icon-->
 
-										<div id="cart_notification_block" class="bullet bullet-dot bg-success h-20px w-20px position-absolute translate-middle top-0 start-50 animation-blink"><span  id="cart_notification">20</span></div>
+										<div id="cart_notification_block" class="bullet bullet-dot bg-success h-20px w-20px position-absolute translate-middle top-0 start-50 animation-blink"><span  id="cart_notification"><%= cart.items.length %></span></div>
 										<style>
 											#cart_notification_block{
 												margin-bottom: 60px !important;

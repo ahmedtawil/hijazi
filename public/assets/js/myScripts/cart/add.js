@@ -106,12 +106,14 @@ var KTModalAddItemToCart = function () {
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
                         const payload = {
-                            _id:item._id,
+                            _id: item._id,
+                            title: item.title,
                             color: $('#color option:selected').val(),
-                            size: $('#size option:selected').val(),
+                            img: $('#modal_color_img').attr('src'),
+                            size: $('#size option:selected').val() || null,
                             qty: $("input[name=qty]").val(),
                         }
-                        if(payload.size == 'custom'){
+                        if (payload.size == 'custom') {
                             payload.height_size = height_size
                             payload.height_unit = height_unit
 
@@ -243,6 +245,8 @@ var KTModalAddItemToCart = function () {
         })
     }
 
+
+
     const getItemById = async (id) => {
         const res = await fetch(`/item/get/${id}`)
         return await res.json()
@@ -266,7 +270,7 @@ var KTModalAddItemToCart = function () {
     $('.addToCart').on('click', async function (e) {
         e.preventDefault()
         form.reset()
-        
+
 
         const itemID = $(this).attr('itemid')
         console.log(itemID);
@@ -277,7 +281,7 @@ var KTModalAddItemToCart = function () {
 
         if (colorId == null) {
             color = item.colors[0]
-            $(`[colorid=${color._id}]`).attr('active' , true)
+            $(`[colorid=${color._id}]`).attr('active', true)
         }
 
         $('#color').empty()
@@ -332,27 +336,28 @@ var KTModalAddItemToCart = function () {
         return price.toFixed(2)
     }
 
-    const triggerPriceCalc = async ()=>{
+    const triggerPriceCalc = async () => {
         let price = 0
         const defaultSize = $('#size option:selected').val()
         const qty = $('#qty').val()
-        if(defaultSize != 'custom'){
-            price = await calcPrice([{unit:'yard' , size:defaultSize}])
-        }else{
-             height_size = $('#height_size').val()
-             height_unit = $('#height_unit option:selected').val()
+        if (defaultSize != 'custom') {
+            price = await calcPrice([{ unit: 'yard', size: defaultSize }])
+        } else {
+            height_size = $('#height_size').val()
+            height_unit = $('#height_unit option:selected').val()
 
-             width_size = $('#width_size').val()
-             width_unit = $('#width_unit option:selected').val()
-             console.log(width_size , width_unit);
-             price = await calcPrice([{unit:height_unit , size:height_size} , {unit:width_unit , size:width_size}])
+            width_size = $('#width_size').val()
+            width_unit = $('#width_unit option:selected').val()
+            console.log(width_size, width_unit);
+            price = await calcPrice([{ unit: height_unit, size: height_size }, { unit: width_unit, size: width_size }])
         }
-        $('#price').html(`${price} * ${qty} = ${(price*qty).toFixed(2)}`)
+        $('#price').html(`${price} * ${qty} = ${(price * qty).toFixed(2)}`)
     }
-    
-    $('.calcPrice').on('change keyup' , async function (e) {
+
+    $('.calcPrice').on('change keyup', async function (e) {
         await triggerPriceCalc()
     })
+
 
 
     return {
@@ -373,12 +378,6 @@ var KTModalAddItemToCart = function () {
         }
     };
 }();
-
-
-
-
-
-
 
 
 

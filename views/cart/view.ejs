@@ -1,5 +1,5 @@
 <!--begin::Container-->
-<div class="container-xxl" id="kt_content_container">
+<div id="container" customerID="<%= cart.customer %>" class="container-xxl" id="kt_content_container">
     <!--begin::Form-->
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row"
         data-kt-redirect="../../demo9/dist/apps/ecommerce/sales/listing.html">
@@ -143,15 +143,22 @@
                             <!--end::Label-->
                             <!--begin::Select2-->
                             <select class="form-select mb-2" data-control="select2" data-hide-search="true"
-                                data-placeholder="أختر" name="payment_method" id="order_payment">
+                                data-placeholder="أختر" name="payment_method" id="payment_method">
                                 <option></option>
                                 <option value="cash">كاش</option>
                                 <option value="batch">دفعة</option>
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">في حالة الدفعة سيتم ترحيل الباقي على الحساب.</div>
+                            <div class="text-muted fs-7 mb-4">في حالة الدفعة سيتم ترحيل الباقي على الحساب.</div>
                             <!--end::Description-->
+                            <div class="d-none" id="batch_amount_block">
+                                <!--begin::Label-->
+                                <label class="required form-label">قيمة الدفعة</label>
+                                <!--end::Label-->
+                                <!--begin::Select2-->
+                                <input type="number" value="1" min="1" class="form-control form-control-solid calcPrice calcPrice"  id="batch_amount">                            <!--end::Select2-->
+                            </div>
                         </div>
                         <!--end::Input group-->
 
@@ -162,6 +169,7 @@
             <!--end::Order details-->
         </div>
         <!--end::Aside column-->
+
         <!--begin::Main column-->
         <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
             <!--begin::Card header-->
@@ -178,14 +186,14 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
                         <!--begin::Table head-->
                         <thead>
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-100px">المنتج</th>
-                                <th class="min-w-100px text-end">المقاس</th>
-                                <th class="min-w-100px text-end">اللون</th>
+                            <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="min-w-100px ">المنتج</th>
+                                <th class="min-w-100px  text-center">المقاس</th>
+                                <th class="min-w-100px text-center">اللون</th>
 
-                                <th class="min-w-100px text-end">السعر</th>
-                                <th class="min-w-70px text-end">العدد</th>
-                                <th class="min-w-100px text-end">المجموع</th>
+                                <th class="min-w-100px  text-center">السعر</th>
+                                <th class="min-w-70px  text-center">العدد</th>
+                                <th class="min-w-100px  text-center">المجموع</th>
                                 <th class="min-w-100px text-end">الخصائص</th>
                             </tr>
                         </thead>
@@ -193,115 +201,145 @@
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
                             <!--begin::Products-->
-                            <tr>
-                                <!--begin::Product-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
-                                            class="symbol symbol-50px">
-                                            <span class="symbol-label"
-                                                style="background-image:url(/assets/media//stock/ecommerce/1.gif);"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <!--begin::Title-->
-                                        <div class="ms-5">
+                            <% cart.items.forEach((item , index)=> { %>
+                                <tr>
+                                    <!--begin::Product-->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Thumbnail-->
                                             <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
-                                                class="fw-bolder text-gray-600 text-hover-primary">Product 1</a>
-                                            <div class="fs-7 text-muted">Delivery Date: 12/01/2022</div>
+                                                class="symbol symbol-50px">
+                                                <span class="symbol-label"
+                                                    style="background-image:url(<%= item.img %>);"></span>
+                                            </a>
+                                            <!--end::Thumbnail-->
+                                            <!--begin::Title-->
+                                            <div class="ms-5">
+                                                <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                    class="fw-bolder text-gray-600 text-hover-primary">
+                                                    <%= item.title %>
+                                                </a>
+                                                <div class="fs-7 text-muted">
+                                                    <%= item.color.name %>
+                                                </div>
+                                            </div>
+                                            <!--end::Title-->
                                         </div>
-                                        <!--end::Title-->
-                                    </div>
-                                </td>
-                                <!--end::Product-->
-                                <!--begin::SKU-->
-                                <td class="text-end">03673003</td>
-                                <!--end::SKU-->
-                                <!--begin::SKU-->
-                                <td class="text-end">03673003</td>
-                                <!--end::SKU-->
-                                <!--begin::SKU-->
-                                <td class="text-end">03673003</td>
-                                <!--end::SKU-->
-                                <!--begin::Quantity-->
-                                <td class="text-end">2</td>
-                                <!--end::Quantity-->
-                                <!--begin::Price-->
-                                <td class="text-end">$120.00</td>
-                                <!--end::Price-->
-                                <!--begin::Total-->
-                                <td class="text-end"><a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                        data-kt-menu-flip="top-end">خيارات
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                        <span class="svg-icon svg-icon-5 m-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                    fill="black"></path>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                        data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                                class="menu-link px-3">تعديل</a>
+                                    </td>
+
+                                    <!--end::Product-->
+
+                                    <!--begin::SKU-->
+                                    <td class="text-center">
+                                        <%= (isNaN(item.size) || null) ? `${item.height.size}
+                                            ${units[item.height.unit.toUpperCase()].ar} * ${item.width.size}
+                                            ${units[item.width.unit.toUpperCase()].ar}` : `${item.size} يارد` %>
+                                    </td>
+                                    <!--end::SKU-->
+                                    <!--begin::SKU-->
+                                    <td class="text-center">
+                                        <%= item.color.name %>
+                                    </td>
+                                    <!--end::SKU-->
+                                    <!--begin::SKU-->
+                                    <td class="text-center">
+                                        <%= item.price.toFixed(2) %> شيكل
+                                    </td>
+                                    <!--end::SKU-->
+                                    <!--begin::Quantity-->
+                                    <td class="text-center">
+                                        <%= item.qty %>
+                                    </td>
+                                    <!--end::Quantity-->
+                                    <!--begin::Price-->
+                                    <td class="text-center">
+                                        <%= item.totalAmount.toFixed(2) %> شيكل
+                                    </td>
+                                    <!--end::Price-->
+                                    <!--begin::Total-->
+                                    <td class="text-end"><a href="#"
+                                            class="btn btn-sm btn-light btn-active-light-primary"
+                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                                            data-kt-menu-flip="top-end">خيارات
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                            <span class="svg-icon svg-icon-5 m-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                        fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                        </a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3 edit" itemid="<%= index %>">تعديل</a>
+
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3 delete" itemid="<%= index %>">حذف</a>
+                                            </div>
+                                            <!--end::Menu item-->
+
 
                                         </div>
-                                        <!--end::Menu item-->
-                                         <!--begin::Menu item-->
-                                         <div class="menu-item px-3">
-                                            <a href="#"
-                                                class="menu-link px-3">حذف</a>
+                                        <!--end::Menu-->
+                                    </td>
+                                    <!--end::Total-->
 
-                                        </div>
-                                        <!--end::Menu item-->
+                                </tr>
+                                <% }) %>
 
 
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Total-->
+                                    <!--end::Products-->
+                                    <!--begin::Subtotal-->
+                                    <tr>
+                                        <td colspan="5" class="text-end">الإجمالي</td>
+                                        <td class="text-center" id="totalAmount">
+                                            <%= cart.totalAmount.toFixed(2)%> شيكل
+                                        </td>
+                                    </tr>
+                                    <!--end::Subtotal-->
+                                    <!--begin::VAT-->
+                                    <tr>
+                                        <td colspan="5" class="text-end">الخصم</td>
+                                        <td class="text-center" id="discount">
+                                            <%= cart.discount.toFixed(2) %> شيكل
+                                        </td>
+                                    </tr>
+                                    <!--end::VAT-->
 
-                            </tr>
-                            <!--end::Products-->
-                            <!--begin::Subtotal-->
-                            <tr>
-                                <td colspan="5" class="text-end">الإجمالي</td>
-                                <td class="text-end">0 شيكل</td>
-                            </tr>
-                            <!--end::Subtotal-->
-                            <!--begin::VAT-->
-                            <tr>
-                                <td colspan="5" class="text-end">الخصم</td>
-                                <td class="text-end">0 شيكل</td>
-                            </tr>
-                            <!--end::VAT-->
-                           
-                             <!--begin::Grand total-->
-                             <tr>
-                                <td colspan="5" class="fs-3 text-dark text-end">مطلوب للدفع</td>
-                                <td class="text-dark fs-3 fw-boldest text-end">0 شيكل</td>
-                            </tr>
-                            <!--end::Grand total-->
-                            <!--begin::Shipping-->
-                            <tr>
-                                <td colspan="5" class="text-end">المدفوع</td>
-                                <td class="text-end">0 شيكل</td>
-                            </tr>
-                            <!--end::Shipping-->
-                             <!--begin::Shipping-->
-                             <tr>
-                                <td colspan="5" class="text-end">المسترد</td>
-                                <td class="text-end">0 شيكل</td>
-                            </tr>
-                            <!--end::Shipping-->
-                           
+                                    <!--begin::Grand total-->
+                                    <tr>
+                                        <td colspan="5" class="fs-3 text-dark text-end">مطلوب للدفع</td>
+                                        <td class="text-dark fs-3 fw-boldest text-center" id="finalAmount">
+                                            <%= cart.finalAmount.toFixed(2)%> شيكل
+                                        </td>
+                                    </tr>
+                                    <!--end::Grand total-->
+                                    <!--begin::Shipping-->
+                                    <tr>
+                                        <td colspan="5" class="text-end">المدفوع</td>
+                                        <td class="text-center" id="paidAmount">
+                                            <%= cart.paidAmount.toFixed(2)%> شيكل
+                                        </td>
+                                    </tr>
+                                    <!--end::Shipping-->
+                                    <!--begin::Shipping-->
+                                    <tr>
+                                        <td colspan="5" class="text-end">المسترد</td>
+                                        <td class="text-center" id="moneyBack">
+                                            <%= (cart.paidAmount - cart.finalAmount).toFixed(2)%> شيكل
+                                        </td>
+                                    </tr>
+                                    <!--end::Shipping-->
+
                         </tbody>
                         <!--end::Table head-->
                     </table>
@@ -309,11 +347,269 @@
                 </div>
             </div>
             <!--end::Card body-->
+            <div class="modal-footer flex-start">
+                <!--begin::Button-->
+                <button type="reset" id="kt_modal_edit_item_from_cart_cancel" class="btn btn-light me-3">إلغاء</button>
+                <!--end::Button-->
+                <!--begin::Button-->
+                <button type="submit" id="kt_modal_edit_item_from_cart_submit" class="btn btn-primary">
+                    <span class="indicator-label">حفظ</span>
+                    <span class="indicator-progress">الرجاء الإنتظار...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+                <!--end::Button-->
+            </div>
         </div>
 
         <!--end::Main column-->
     </form>
     <!--end::Form-->
+    <!--begin::Modal - Cart - Add-->
+    <div class="modal fade" id="kt_modal_edit_item_from_cart" tabindex="-1" aria-hidden="true">
+
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-800px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Form-->
+                <form class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#"
+                    id="kt_modal_edit_item_from_cart_form" data-kt-redirect="/item/new" autocomplete="off"
+                    enctype="multipart/form-data">
+                    <!--begin::Modal header-->
+                    <div class="modal-header" id="kt_modal_edit_item_from_cart_header">
+                        <!--begin::Modal title-->
+                        <h2 class="fw-bolder">تعديل العنصر<div class="badge badge-light-success" id="modal_item_title">
+                            </div>
+                        </h2>
+
+                        <!--end::Modal title-->
+                        <!--begin::Close-->
+                        <div id="kt_modal_edit_item_from_cart_close"
+                            class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                        transform="rotate(45 7.41422 6)" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Modal header-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body py-10 px-lg-17">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <!--begin::Scroll-->
+                                <div class="scroll-y me-n7 pe-7" id="kt_modal_edit_item_from_cart_scroll"
+                                    data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                                    data-kt-scroll-max-height="auto"
+                                    data-kt-scroll-dependencies="#kt_modal_edit_item_from_cart_header"
+                                    data-kt-scroll-wrappers="#kt_modal_edit_item_from_cart_scroll"
+                                    data-kt-scroll-offset="300px" style="max-height: 647px;">
+
+
+
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-bold mb-2">اللون</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select name="color" id="color" class="form-select form-select-solid fw-bolder"
+                                            data-kt-select2="true" data-placeholder="أختر..." data-hide-search="true">
+
+                                        </select>
+
+                                        <!--end::Input-->
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-bold mb-2">المقاس</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select name="size" id="size"
+                                            class="form-select form-select-solid fw-bolder calcPrice"
+                                            data-kt-select2="true" data-placeholder="أختر..." data-hide-search="true">
+                                            <option value="9">9 فجة</option>
+                                            <option value="10.5">10.5 فجة</option>
+                                            <option value="12">12 فجة</option>
+                                            <option value="14">14 فجة</option>
+                                            <option value="16">16 فجة</option>
+                                            <option value="18">18 فجة</option>
+                                            <option value="20">20 فجة</option>
+                                            <option value="custom">مقاس مخصص</option>
+                                        </select>
+
+                                        <!--end::Input-->
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-bold mb-2">الكمية</label>
+
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="number" value="1" min="1"
+                                            class="form-control form-control-solid calcPrice calcPrice" name="qty"
+                                            id="qty">
+
+
+                                        <!--end::Input-->
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+
+                                    <div class="d-none" id="custom_size_block">
+                                        <label class="required fs-6 fw-bold mb-2">الطول</label>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <input type="number" value="0" min="0"
+                                                        class="form-control form-control-solid calcPrice"
+                                                        name="height_size" id="height_size">
+
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <select name="height_unit" id="height_unit"
+                                                        class="form-select form-select-solid fw-bolder calcPrice"
+                                                        data-kt-select2="true" data-placeholder="أختر..."
+                                                        data-hide-search="true">
+                                                        <% unitsArr.forEach(unit=> { %>
+                                                            <option value="<%= units[unit.toUpperCase()].en %>">
+                                                                <%= units[unit.toUpperCase()].ar %>
+                                                            </option>
+                                                            <% }) %>
+                                                    </select>
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="required fs-6 fw-bold mb-2">العرض</label>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <input type="number"
+                                                        class="form-control form-control-solid calcPrice" value="0"
+                                                        min="0" name="width_size" id="width_size">
+
+
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <!--begin::Label-->
+
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <select name="width_unit" id="width_unit"
+                                                        class="form-select form-select-solid fw-bolder calcPrice"
+                                                        data-kt-select2="true" data-placeholder="أختر..."
+                                                        data-hide-search="true">
+                                                        <% unitsArr.forEach(unit=> { %>
+                                                            <option value="<%= units[unit.toUpperCase()].en %>">
+                                                                <%= units[unit.toUpperCase()].ar %>
+                                                            </option>
+                                                            <% }) %>
+
+                                                    </select>
+
+                                                    <!--end::Input-->
+                                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end::Scroll-->
+                            </div>
+                            <div class="col-md-7">
+                                <div id="image-contanier" class="text-center">
+                                    <img id="modal_color_img" src="/assets/media/illustrations/sigma-1/9.png" alt=""
+                                        class="rounded" />
+                                    <span id="price"
+                                        class="price badge badge-light-primary fw-bolder me-auto px-4 py-3">
+                                        101
+                                    </span>
+                                </div>
+                                <style>
+                                    img {
+                                        width: 100%;
+                                        height: 300px;
+                                        object-fit: cover !important;
+                                    }
+
+                                    #image-contanier {
+                                        position: relative;
+                                        display: inline-block;
+                                        text-align: center;
+                                        width: 100%;
+                                        height: 300px;
+                                    }
+
+                                    .price {
+                                        position: absolute;
+                                        top: 15px;
+                                        right: 15px;
+                                        width: 150px;
+                                        height: 30px;
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Modal body-->
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                        <!--begin::Button-->
+                        <button type="reset" id="kt_modal_edit_item_from_cart_cancel"
+                            class="btn btn-light me-3">إلغاء</button>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_modal_edit_item_from_cart_submit" class="btn btn-primary">
+                            <span class="indicator-label">حفظ</span>
+                            <span class="indicator-progress">الرجاء الإنتظار...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        <!--end::Button-->
+                    </div>
+                    <!--end::Modal footer-->
+                    <div></div>
+                </form>
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+    <!--end::Modals-->
 </div>
 <!--end::Container-->
 
@@ -327,9 +623,16 @@
 <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <script src="/assets/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
 <!--end::Page Vendors Javascript-->
+<script>
+    const customerID = $('#container').attr('customerID')
+    console.log(customerID);
+
+</script>
+
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="/assets/js/myScripts/item/list.js"></script>
-<script src="/assets/js/myScripts/item/cart/add.js"></script>
+<script src="/assets/js/myScripts/cart/edit.js"></script>
+<script src="/assets/js/myScripts/cart/delete.js"></script>
 
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->

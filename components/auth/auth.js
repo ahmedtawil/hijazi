@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Employee = require('../../models/Employee')
+const User = require('../../models/User')
 const ErrorHandler = require('../../utils/errorHandler');
 const catchAsyncErrors = require('../../middlewares/catchAsyncErrors');
 const sendToken = require('../../utils/jwtToken');
@@ -16,7 +16,7 @@ exports.getLoginPage = catchAsyncErrors(async (req, res, next) => {
 // Login User  =>  /a[i/v1/login
 exports.postLoginPage = catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
-   // const x = new Employee({name:"فادي محسن" , email:"admin" , password:"123456879"})
+   // const x = new User({name:"فادي محسن" , email:"admin" , password:"123456879"})
    // x.save()
 
     // Checks if email and password is entered by user
@@ -25,8 +25,7 @@ exports.postLoginPage = catchAsyncErrors(async (req, res, next) => {
     }
 
     // Finding user in database
-    const user = await Employee.findOne({ email , password })
-    console.log(user);
+    const user = await User.findOne({ email , password })
 
     if (!user) {
         return next(new ErrorHandler('خطأ في رقم الهوية أو كلمة المرور.', 400));

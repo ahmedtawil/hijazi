@@ -1,4 +1,4 @@
-const Employee = require('../models/Employee')
+const User = require('../models/User')
 
 const jwt = require("jsonwebtoken");
 const ErrorHandler = require("../utils/errorHandler");
@@ -13,7 +13,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     }
 
     const decoded = await jwt.verify(token, process.env.JWT_SECRET)
-    const employee = await Employee.findById(decoded.id);
+    const employee = await User.findById(decoded.id);
     if(!employee)  {
         
         return next(new ErrorHandler('user not found!.', 401))

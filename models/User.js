@@ -1,13 +1,19 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 const { errors } = require('../data/staticData');
+const jwt = require('jsonwebtoken')
 
 const { objToEnumArr, sex, socialState, citizen, governorate, days } = require('../data/enumeration');
 
-const customerSchema = new Schema({
+const UserSchema = new Schema({
     name: {
         type: String,
         required: [true, errors.name.ar],
+    },
+    type:{
+        type:String,
+        enum:['customer' , 'employee'],
+        default:'customer'
     },
     formalID: {
         type: String,
@@ -52,7 +58,7 @@ const customerSchema = new Schema({
         },
         trim: true
     },
-    cart:[],
+    cart:{},
     address: {
         type: String,
         required: [true, 'عنوان الزبون مطلوب'],
@@ -77,4 +83,9 @@ const customerSchema = new Schema({
         default: Date.now
     },
 })
-module.exports = mongoose.model('Customer', customerSchema)
+UserSchema.methods.getJwtToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_TIME
+    });
+}
+module.exports = mongoose.model('User', UserSchema)
