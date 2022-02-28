@@ -1,4 +1,6 @@
-<!--begin::Container-->
+<% const cartIsEmpty = (typeof cart == "undefined" || Object.keys(cart).length == 0 || typeof cart.items == "undefined" ||  cart.items.length == 0)%> 
+<% if (!cartIsEmpty) { %>
+ <!--begin::Container-->
 <div id="container" customerID="<%= cart.customer %>" class="container-xxl" id="kt_content_container">
     <!--begin::Form-->
     <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row"
@@ -349,11 +351,11 @@
             <!--end::Card body-->
             <div class="modal-footer flex-start">
                 <!--begin::Button-->
-                <button type="reset" id="kt_modal_edit_item_from_cart_cancel" class="btn btn-light me-3">إلغاء</button>
+                <input type="button" class="btn btn-light me-3 cancel" value="إلغاء">
                 <!--end::Button-->
                 <!--begin::Button-->
-                <button type="submit" id="kt_modal_edit_item_from_cart_submit" class="btn btn-primary">
-                    <span class="indicator-label">حفظ</span>
+                <button type="submit" class="btn btn-primary">
+                    <span class="indicator-label save">حفظ</span>
                     <span class="indicator-progress">الرجاء الإنتظار...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
@@ -612,8 +614,15 @@
     <!--end::Modals-->
 </div>
 <!--end::Container-->
-
-
+<% } else { %>
+    <div id="container" class="container-xxl" id="kt_content_container">
+        <div class="d-flex flex-column flex-center">
+            <img src="/assets/media/illustrations/sketchy-1/5.png" class="mw-400px">
+            <div class="fs-1 fw-bolder text-dark mb-4">لا يوجد طلبية في السلة.</div>
+            <div class="fs-6">قم بتصفح المنتجات وأختر طلبيتك!</div>
+        </div>
+    </div>
+<% } %>
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
@@ -628,11 +637,12 @@
     console.log(customerID);
 
 </script>
-
+<% if (!cartIsEmpty) { %>
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="/assets/js/myScripts/item/list.js"></script>
 <script src="/assets/js/myScripts/cart/edit.js"></script>
 <script src="/assets/js/myScripts/cart/delete.js"></script>
-
+<script src="/assets/js/myScripts/cart/save.js"></script>
+<% } %>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->

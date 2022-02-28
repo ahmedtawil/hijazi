@@ -7,16 +7,14 @@ const orderSchema = new Schema({
     serialNumber: {
         type: String,
     },
-    customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
+    customer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     items: [{
         _id: {
             type: Schema.Types.ObjectId, ref: 'Item',
             required: true
         },
-        color: {
-            type: String,
-            required: true
-        },
+        color: { type: Schema.Types.ObjectId, ref: 'Color', required: true }
+        ,
         price: {
             type: Number,
             required: true
@@ -51,11 +49,19 @@ const orderSchema = new Schema({
         },
     }]
     ,
-    discount: {
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected', 'recived']
+    },
+    paymentMethod: {
+        type: String,
+        enum: ['cash', 'batch']
+    },
+    totalAmount: {
         type: Number,
         required: true
     },
-    totalAmount: {
+    discount: {
         type: Number,
         required: true
     },
@@ -67,6 +73,14 @@ const orderSchema = new Schema({
         type: Number,
         required: true
     },
+    moneyBack: {
+        type: Number,
+        required: true
+    },
+    cartDate: {
+        type: Date,
+        default: Date.now
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -74,6 +88,7 @@ const orderSchema = new Schema({
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 
 })
+/*
 orderSchema.pre('save', async function (next) {
     if (!this.serialNumber) {
         if (this.isNew) {
@@ -83,6 +98,7 @@ orderSchema.pre('save', async function (next) {
     }
     next()
 })
+*/
 
 
 

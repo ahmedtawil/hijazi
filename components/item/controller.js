@@ -7,7 +7,7 @@ const Item = require('../../models/Item')
 const Color = require('../../models/Color');
 const Unit = require('../../models/Unit');
 
-const {units} = require('../../data/constants')
+const { units } = require('../../data/constants')
 
 
 exports.getItemsPage = catchAsyncErrors(async (req, res) => {
@@ -16,8 +16,15 @@ exports.getItemsPage = catchAsyncErrors(async (req, res) => {
   //const units = await Unit.find()
   //res.render('item/table', { colors })
 
-  res.render('item/list' , {colors , items , units , unitsArr:Object.keys(units)})
+  res.render('item/list', { colors, items, units, unitsArr: Object.keys(units) })
 })
+exports.getItemsAdminPage = catchAsyncErrors(async (req, res) => {
+  const colors = await Color.find()
+  const units = await Unit.find()
+  res.render('item/table', { colors })
+
+})
+
 
 exports.getItemsData = catchAsyncErrors(async (req, res) => {
   const query = req.query
@@ -68,7 +75,7 @@ exports.newItem = catchAsyncErrors(async (req, res) => {
   }
   const colors = [];
 
-  const promises = files.map(async(file, i) => {
+  const promises = files.map(async (file, i) => {
     const object = {}
     if (file !== undefined) {
       let fileURL = await uploadFile(
@@ -85,12 +92,13 @@ exports.newItem = catchAsyncErrors(async (req, res) => {
   })
 
   await Promise.all(promises)
-
   let item = new Item({
     title: title,
     colors: colors
   });
+
   await item.save()
+
   res.end()
 })
 // post editPage 

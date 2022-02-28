@@ -21,7 +21,7 @@ var KTModalAddItemToCart = function () {
 
     let currentTotals
     $(document).ready(async function () {
-        await updatePaymentMethod()
+        await getPaymentMethodData()
 
     });
 
@@ -375,25 +375,26 @@ var KTModalAddItemToCart = function () {
     $('#payment_method').on('change', async function (e) {
         const payment_method = $(this).val()
         const batch_amount_block = $('#batch_amount_block')
+        console.log($('#batch_amount').val());
         if (payment_method == 'batch') {
             const batch_amount = $('#batch_amount').val()
             cartData.paidAmount = parseFloat(batch_amount)
             cartData.paymentMethod = 'batch'
-            updateTotals()
             batch_amount_block.removeClass('d-none')
         } else {
             cartData.paidAmount = cartData.finalAmount
             cartData.paymentMethod = 'cash'
-            updateTotals()
             batch_amount_block.addClass('d-none')
         }
-
-
+        //console.log(`$('#payment_method').on('change', async function (e) {`);
+        updateTotals()
     })
 
     $('#batch_amount').on('change keyup', function (e) {
         const val = $(this).val()
+        console.log(val);
         cartData.paidAmount = parseFloat(val)
+        //console.log(`$('#batch_amount').on('change keyup', function (e) {`);
         updateTotals()
     })
 
@@ -421,8 +422,9 @@ var KTModalAddItemToCart = function () {
         return await res.json()
     }
 
-    const updatePaymentMethod = async () => {
+    const getPaymentMethodData = async () => {
         cartData = await getCartTotals()
+        console.log(cartData);
         const batch_amount_block = $('#batch_amount_block')
         const payment_method = $('#payment_method')
 
@@ -431,8 +433,8 @@ var KTModalAddItemToCart = function () {
             cartData.paidAmount = 0
         }
         if (cartData.paymentMethod == 'batch') {
-            payment_method.val('batch').change()
             $('#batch_amount').val(cartData.paidAmount)
+            payment_method.val('batch').change()
             batch_amount_block.removeClass('d-none')
         } else {
             payment_method.val('cash').change()
