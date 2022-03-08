@@ -17,7 +17,7 @@ exports.units = {
     FAJA: {
         en:'faja',
         ar:'فجه مصري',
-        weight:150
+        weight:180
     }
 }
 

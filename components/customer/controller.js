@@ -33,14 +33,14 @@ exports.getCustomersData = catchAsyncErrors(async (req, res) => {
     }
   }
 
-  const customersCount = await Customer.estimatedDocumentCount()
-  const customersFillterCount = await Customer.find(queryObj).countDocuments()
-  const customers = await Customer.find(queryObj).limit(parseInt(query.length)).skip(parseInt(query.start))
+  const UsersCount = await User.estimatedDocumentCount()
+  const UsersFillterCount = await User.find(queryObj).countDocuments()
+  const Users = await User.find(queryObj).limit(parseInt(query.length)).skip(parseInt(query.start))
 
   return res.json({
-    recordsTotal: customersCount,
-    recordsFiltered: customersFillterCount,
-    customers
+    recordsTotal: UsersCount,
+    recordsFiltered: UsersFillterCount,
+    Users
   })
 
 
@@ -56,7 +56,8 @@ exports.getCustomersPage = catchAsyncErrors(async (req, res) => {
 exports.newCustomer = catchAsyncErrors(async (req, res) => {
   const data = req.body
   data.isConfirm = true ;
-  const newCustomer = new Customer(data)
+  data.type = "customer";
+  const newCustomer = new User(data)
   await newCustomer.validate()
   newCustomer.save()
   res.end()
@@ -86,7 +87,7 @@ exports.editCustomer = catchAsyncErrors(async (req, res) => {
 
 exports.checkIFformalIDisExist = catchAsyncErrors(async (req, res) => {
   const formalID = req.params.formalID
-  const found = await Customer.findOne({ formalID })
+  const found = await User.findOne({ formalID })
   if (!found) return res.status(200).json({ isExisted: false })
   return res.status(200).json({ isExisted: true })
 
@@ -97,7 +98,7 @@ exports.getCustomerProfilePage = catchAsyncErrors(async (req, res) => {
   const id = req.params.customerID
   if (!mongoose.isValidObjectId(id)) return next(new ErrorHandler('', 404))
 
-  const customer = await Customer.findById(id)
+  const customer = await User.findById(id)
   if(!customer) return next(new ErrorHandler('', 404))
 
   res.render('customer/profile/profile' , {customer})

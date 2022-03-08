@@ -16,7 +16,8 @@ const item = require('./components/item/route')
 const unit = require('./components/unit/route')
 const color = require('./components/color/route')
 const cart = require('./components/cart/route')
-
+const order = require('./components/order/route')
+const invoice = require('./components/invoice/route')
 const util = require('./components/util/route')
 
 
@@ -36,10 +37,11 @@ app.use(async(req, res, next) => {
 app.use('/', dashboardRoute)
 app.use('/', unit)
 app.use('/', color)
-
+app.use('/', order)
 app.use('/', customerRoute)
 app.use('/', item)
 app.use('/', cart)
+app.use('/', invoice)
 
 
 app.use('/', util)

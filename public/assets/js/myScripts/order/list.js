@@ -10,6 +10,9 @@ var KTcustomersList = function () {
     var filterPayment;
     var table
     let dataRes
+    let itemID
+    let item
+    let itemFromDb
 
     let dateQuery = {
 
@@ -34,8 +37,8 @@ var KTcustomersList = function () {
 
 
             "ajax": {
-                url: "/customers/data/get",
-                "dataSrc": 'Users',
+                url: "/orders/data/get",
+                "dataSrc": 'Orders',
                 "dataFilter": function (res) {
                     dataRes = JSON.parse(res)
                     return res
@@ -44,13 +47,52 @@ var KTcustomersList = function () {
 
 
             columns: [
-                { data: 'name' },
-                {
-                    data: 'formalID',
+                { data: 'customer.name' },
+                { data: 'totalAmount' , 
+                render: function (data, type, doc) {
+                    return `${data.toFixed(2)} شيكل`
+                }
                 },
-                { data: 'phoneNumber' },
+                {data: 'paymentMethod' ,
+                render: function (data, type, doc) {
+                    if (data=="cash") {
+                        return `<span class="badge badge-light-success">كاش</span>`
+                    }else {
+                        return `<span class="badge badge-light-danger">دفعة</span>`
+
+                    }
+                
+                }
+                },
                 {
-                    data: 'address',
+                    data: 'paidAmount', 
+                    render: function (data, type, doc) {
+                        return `${data.toFixed(2)} شيكل`
+                    }
+                },
+                {
+                    data: 'status', 
+                    render: function (data, type, doc) {
+
+                        let span
+                        switch (data) {
+                            case 'pending':
+                                span = `<div class="badge badge-light-warning">معلقة</div>`
+                                break;
+                            case 'approved':
+                                span = `<div class="badge badge-light-primary">قيد التنفيذ</div>`
+                                break;
+                            case 'rejected':
+                                span = `<div class="badge badge-light-danger">مرفوضة</div>`
+                                break;
+                            case 'recived':
+                                span = `<div class="badge badge-light-success">تم التوصيل</div>`
+                                break;
+
+                        }
+                        return span
+
+                    }
                 },
                 {
                     data: '',
@@ -74,11 +116,13 @@ var KTcustomersList = function () {
                         data-kt-menu="true">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
-                         <a href="/customer/profile/get/${doc._id}" class="menu-link px-3">البروفايل</a>
-
+                         <a href="/order/${doc._id}" class="menu-link px-3">عرض الطلبية</a>
                         </div>
                         <!--end::Menu item-->
-
+                        <div class="menu-item px-3">
+                        <a href="#" class="menu-link px-3 printOrder" id="printOrder" orderID='${doc._id}'>طباعة ارسالية</a>
+                        </div>
+                        <!--begin::Menu item-->
                                       
                     </div>
                     <!--end::Menu-->`
@@ -91,10 +135,10 @@ var KTcustomersList = function () {
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
-            $('a').click(function (e) {
                 KTMenu.createInstances();
-            })
+           
             handleDeleteRows();
+            linkPrintInvoiceEventTrigger();
         });
     }
 
@@ -261,7 +305,56 @@ var KTcustomersList = function () {
             })
         });
     }
+    const getCartItemByIndex = async (index) => {
+        const res = await fetch(`/cart/item/index/get/${index}`)
+        return await res.json()
+    }
+    const getItemById = async (id) => {
+        const res = await fetch(`/item/get/${id}`)
+        return await res.json()
+    }
+    $('.edit').on('click', async function (e) {
+        console.log("ssss");
 
+        e.preventDefault()
+        form.reset()
+        itemID = $(this).attr('itemid')
+        item = await getCartItemByIndex(itemID)
+        itemFromDb = await getItemById(item._id)
+
+        $('#color').empty()
+        itemFromDb.colors.forEach(color => {
+            $('#color').append($('<option/>', {
+                value: color.color._id,
+                text: color.color.name
+            }));
+        })
+        const is_custom_size = (isNaN(item.size) || item.size == null) ? true : false
+
+        $('#modal_item_title').text(item.title)
+        $('#color').val(item.color._id).change()
+        $('#qty').val(item.qty)
+        if (is_custom_size) {
+            $("#size").prop('value', 'custom').change();
+            $("#height_unit").prop('value', item.height.unit).change();
+            $("#width_unit").prop('value', item.width.unit).change();
+
+            $('#height_size').val(item.height.size)
+            $('#width_size').val(item.width.size)
+
+        } else {
+            $("#size").prop('value', item.size).change();
+            $("#height_unit").prop('selectedIndex', 0).change();
+            $("#width_unit").prop('selectedIndex', 0).change();
+            $('#height_size').val(0)
+            $('#width_size').val(0)
+        }
+        $('#modal_color_img').attr('src', item.img)
+        await triggerPriceCalc()
+
+        $('#kt_modal_edit_item_from_cart').modal('toggle');
+
+    })
 
 
 

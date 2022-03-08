@@ -50,7 +50,6 @@ var KTitemsTable = function () {
                     render: function (data, type, doc) {
                         let span
                         return data.map(color => {
-                            console.log(color.image);
                             return span = `<span class="badge badge-light-info fw-bolder m-25px"> اللون: ${color.color}</span>` + `<span class="symbol-label">
                     <a href="${color.image}"target="_blank" class="symbol symbol-50px m-10px">
                         <span class="symbol-label m-10px" style="background-image:url(${color.image});"></span>

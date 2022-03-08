@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html direction="rtl" dir="rtl" style="direction: rtl">
+<!--begin::Head-->
+
+<head>
+    <base href="">
+	<title>شركة حجازي</title>
+	<meta charset="utf-8" />
+	<meta name="description" content="شركة حجازي لصناعة الحصر" />
+	<meta name="keywords" content="شركة حجازي , حجازي , حصائر , حصيرة , حصر , غزة , فلسطين , صناعة" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:locale" content="Ar_SA" />
+	<meta property="og:title" content="شركة حجازي لصناعة الحصر" />
+	<meta property="og:url" content="https://www.hijazi.ps" />
+	<meta property="og:site_name" content="شركة حجازي" />
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+	<!--begin::Fonts-->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+		rel="stylesheet">
+	<!--end::Fonts-->
+	<!--begin::Page Vendor Stylesheets(used by this page)-->
+	<link href="/assets/plugins/custom/leaflet/leaflet.bundle.rtl.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/plugins/custom/datatables/datatables.bundle.rtl.css" rel="stylesheet" type="text/css" />
+	<!--end::Page Vendor Stylesheets-->
+	<!--begin::Global Stylesheets Bundle(used by all pages)-->
+	<link href="/assets/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+	<!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+
+<body>
+    <!-- begin::Body-->
+    <div class="card-body">
+        <!-- begin::Wrapper-->
+        <div class="mw-lg-950px mx-auto w-100">
+           
+            <!--begin::Body-->
+            <div class="pb-12">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column">
+                    <!--begin::Separator-->
+                    <div class="separator"></div>
+                    <!--begin::Separator-->
+                    <!--begin::Order details-->
+                    <div class="d-flex align-middle flex-sm-row fw-bolder">
+                        <div class="flex-root d-flex flex-column">
+                            <span class="text-muted">رقم الارسالية</span>
+                            <span class="fs-5">#14534</span>
+                        </div>
+                        <div class="flex-root d-flex flex-column">
+                            <span class="text-muted">التاريخ</span>
+                            <span class="fs-5"><%=moment().format('YYYY/MM/DD')%></span>
+                        </div>
+                        <div class="flex-root d-flex flex-column">
+                            <span class="text-muted">سعر اليارد</span>
+                            <span class="fs-5">4.3 شيكل</span>
+                        </div>
+                        <div class="flex-root d-flex flex-column">
+                            <span class="fs-5">أقر بأن الحسابات مطابقه تماما لما هو موجود لدينا كما أقر بأن المبلغ المشار اليه أعلاه هو حق كامل للسيد حامد محمود حجازي " مصنع حجازي للحصير "يعتبر هذا السند تنفيذي ويخضع لأحكام قانون التنفيذرقم 23 لسنة 2005</span>
+                        </div>
+                        <!--begin::Billing & shipping-->
+                    </div>
+                    <!--end::Order details-->
+                    
+                    <div class="d-flex flex-column flex-sm-row fw-bolder">
+                        <div class="flex-root d-flex flex-column">
+                            <span class="text-muted">اسم الزبون</span>
+                            <span class="fs-6"><%= order.customer.name %> </span>
+                        </div>
+                    </div>
+                    <!--end::Billing & shipping-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                        <div class="table-responsive">
+                            <!--begin::Table-->
+                            <table class="table align-middle table-row-dashed fs-6 mb-0">
+                                <!--begin::Table head-->
+                                <thead>
+                                    <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                        <th class="min-w-100px ">المنتج</th>
+                                        <th class="min-w-100px  text-center">المقاس</th>
+                                        <th class="min-w-100px text-center">اللون</th>
+
+                                        <th class="min-w-100px  text-center">السعر</th>
+                                        <th class="min-w-70px  text-center">العدد</th>
+                                        <th class="min-w-100px  text-center">المجموع</th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody class="fw-bold text-gray-600">
+                                    <!--begin::Products-->
+                                    <% order.items.forEach((item , index)=> { %>
+                                        <tr>
+                                            <!--begin::Product-->
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Thumbnail-->
+                                                    <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                        class="symbol symbol-50px">
+                                                        <span class="symbol-label"
+                                                            style="background-image:url(<%=item.img%>)"></span>
+                                                    </a>
+                                                    <!--end::Thumbnail-->
+                                                    <!--begin::Title-->
+                                                    <div class="ms-5">
+                                                        <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                            class="fw-bolder text-gray-600 text-hover-primary">
+                                                            <%= item.title %>
+                                                        </a>
+                                                        <div class="fs-7 text-muted">
+                                                            <%= item.color.name %>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Title-->
+                                                </div>
+                                            </td>
+
+                                            <!--end::Product-->
+
+                                            <!--begin::SKU-->
+                                            <td class="text-center">
+                                                <%= (isNaN(item.size) || null) ? `${item.height.size}
+                                                    ${units[item.height.unit.toUpperCase()].ar} * ${item.width.size}
+                                                    ${units[item.width.unit.toUpperCase()].ar}` : `${item.size} يارد` %>
+                                            </td>
+                                            <!--end::SKU-->
+                                            <!--begin::SKU-->
+                                            <td class="text-center">
+                                                <%= item.color.name %>
+                                            </td>
+                                            <!--end::SKU-->
+                                            <!--begin::SKU-->
+                                            <td class="text-center">
+                                                <%= item.price.toFixed(2) %> شيكل
+                                            </td>
+                                            <!--end::SKU-->
+                                            <!--begin::Quantity-->
+                                            <td class="text-center">
+                                                <%= item.qty %>
+                                            </td>
+                                            <!--end::Quantity-->
+                                            <!--begin::Price-->
+                                            <td class="text-center">
+                                                <%= item.totalAmount.toFixed(2) %> شيكل
+                                            </td>
+                                            <!--end::Price-->
+                                            
+
+                                        </tr>
+                                        <% }) %>
+
+
+                                            <!--end::Products-->
+                                            <!--begin::Subtotal-->
+                                            <tr>
+                                                <td colspan="5" class="text-end">الإجمالي</td>
+                                                <td class="text-center" id="totalAmount">
+                                                    <%= order.totalAmount.toFixed(2)%> شيكل
+                                                </td>
+                                            </tr>
+                                            <!--end::Subtotal-->
+                                            <!--begin::VAT-->
+                                            <tr>
+                                                <td colspan="5" class="text-end">حساب مرحل</td>
+                                                <td class="text-center" id="discount">
+                                                    <%= order.customer.balance.toFixed(2) %> شيكل
+                                                </td>
+                                            </tr>
+                                            <!--end::VAT-->
+
+                                            <!--begin::Grand total-->
+                                            <tr>
+                                                <td colspan="5" class="fs-3 text-dark text-end">إجمالي المبلغ</td>
+                                                <td class="text-dark fs-3 fw-boldest text-center" id="finalAmount">
+                                                    <% let total = order.totalAmount + order.customer.balance %>
+                                                    <%= total.toFixed(2)%> شيكل
+                                                </td>
+                                            </tr>
+                                            <!--end::Grand total-->
+
+                                </tbody>
+                                <!--end::Table head-->
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!-- end::Wrapper-->
+    </div>
+    <!-- end::Body-->
+<!-- begin::Body-->
+<div class="card-body">
+    <!-- begin::Wrapper-->
+    <div class="mw-lg-950px mx-auto w-100">
+       
+        <!--begin::Body-->
+        <div class="pb-12">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column">
+                <!--begin::Separator-->
+                <div class="separator"></div>
+                <!--begin::Separator-->
+                <!--begin::Order details-->
+                <div class="d-flex align-middle flex-sm-row fw-bolder">
+                    <div class="flex-root d-flex flex-column">
+                        <span class="text-muted">رقم الارسالية</span>
+                        <span class="fs-5">#14534</span>
+                    </div>
+                    <div class="flex-root d-flex flex-column">
+                        <span class="text-muted">التاريخ</span>
+                        <span class="fs-5"><%=moment().format('YYYY/MM/DD')%></span>
+                    </div>
+                    <div class="flex-root d-flex flex-column">
+                        <span class="text-muted">سعر اليارد</span>
+                        <span class="fs-5">4.3 شيكل</span>
+                    </div>
+                    <div class="flex-root d-flex flex-column">
+                        <span class="fs-5">أقر بأن الحسابات مطابقه تماما لما هو موجود لدينا كما أقر بأن المبلغ المشار اليه أعلاه هو حق كامل للسيد حامد محمود حجازي " مصنع حجازي للحصير "يعتبر هذا السند تنفيذي ويخضع لأحكام قانون التنفيذرقم 23 لسنة 2005</span>
+                    </div>
+                </div>
+                <!--end::Order details-->
+                
+                <!--begin::Billing & shipping-->
+                <div class="d-flex flex-column flex-sm-row fw-bolder">
+                    <div class="flex-root d-flex flex-column">
+                        <span class="text-muted">اسم الزبون</span>
+                        <span class="fs-6"><%= order.customer.name %> </span>
+                    </div>
+                </div>
+                <!--end::Billing & shipping-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle table-row-dashed fs-6 mb-0">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class=" text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-100px ">المنتج</th>
+                                    <th class="min-w-100px  text-center">المقاس</th>
+                                    <th class="min-w-100px text-center">اللون</th>
+
+                                    <th class="min-w-100px  text-center">السعر</th>
+                                    <th class="min-w-70px  text-center">العدد</th>
+                                    <th class="min-w-100px  text-center">المجموع</th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody class="fw-bold text-gray-600">
+                                <!--begin::Products-->
+                                <% order.items.forEach((item , index)=> { %>
+                                    <tr>
+                                        <!--begin::Product-->
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Thumbnail-->
+                                                <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                    class="symbol symbol-50px">
+                                                    <span class="symbol-label"
+                                                        style="background-image:url(<%=item.img%>)"></span>
+                                                </a>
+                                                <!--end::Thumbnail-->
+                                                <!--begin::Title-->
+                                                <div class="ms-5">
+                                                    <a href="../../demo9/dist/apps/ecommerce/catalog/edit-product.html"
+                                                        class="fw-bolder text-gray-600 text-hover-primary">
+                                                        <%= item.title %>
+                                                    </a>
+                                                    <div class="fs-7 text-muted">
+                                                        <%= item.color.name %>
+                                                    </div>
+                                                </div>
+                                                <!--end::Title-->
+                                            </div>
+                                        </td>
+
+                                        <!--end::Product-->
+
+                                        <!--begin::SKU-->
+                                        <td class="text-center">
+                                            <%= (isNaN(item.size) || null) ? `${item.height.size}
+                                                ${units[item.height.unit.toUpperCase()].ar} * ${item.width.size}
+                                                ${units[item.width.unit.toUpperCase()].ar}` : `${item.size} يارد` %>
+                                        </td>
+                                        <!--end::SKU-->
+                                        <!--begin::SKU-->
+                                        <td class="text-center">
+                                            <%= item.color.name %>
+                                        </td>
+                                        <!--end::SKU-->
+                                        <!--begin::SKU-->
+                                        <td class="text-center">
+                                            <%= item.price.toFixed(2) %> شيكل
+                                        </td>
+                                        <!--end::SKU-->
+                                        <!--begin::Quantity-->
+                                        <td class="text-center">
+                                            <%= item.qty %>
+                                        </td>
+                                        <!--end::Quantity-->
+                                        <!--begin::Price-->
+                                        <td class="text-center">
+                                            <%= item.totalAmount.toFixed(2) %> شيكل
+                                        </td>
+                                        <!--end::Price-->
+                                        
+
+                                    </tr>
+                                    <% }) %>
+
+
+                                        <!--end::Products-->
+                                        <!--begin::Subtotal-->
+                                        <tr>
+                                            <td colspan="5" class="text-end">الإجمالي</td>
+                                            <td class="text-center" id="totalAmount">
+                                                <%= order.totalAmount.toFixed(2)%> شيكل
+                                            </td>
+                                        </tr>
+                                        <!--end::Subtotal-->
+                                        <!--begin::VAT-->
+                                        <tr>
+                                            <td colspan="5" class="text-end">حساب مرحل</td>
+                                            <td class="text-center" id="discount">
+                                                <%= order.customer.balance.toFixed(2) %> شيكل
+                                            </td>
+                                        </tr>
+                                        <!--end::VAT-->
+
+                                        <!--begin::Grand total-->
+                                        <tr>
+                                            <td colspan="5" class="fs-3 text-dark text-end">إجمالي المبلغ</td>
+                                            <td class="text-dark fs-3 fw-boldest text-center" id="finalAmount">
+                                                <%= total.toFixed(2)%> شيكل
+                                            </td>
+                                        </tr>
+                                        <!--end::Grand total-->
+
+                            </tbody>
+                            <!--end::Table head-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Body-->
+    </div>
+    <!-- end::Wrapper-->
+</div>
+<!-- end::Body-->
+</body>
+
+</html>

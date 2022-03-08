@@ -2,7 +2,7 @@ const { units } = require('../data/constants')
 const priceCalc = function (height = { unit: units.FAJA.en, size: 0 }, width = { unit: units.FAJA.en, size: 0 }) {
     let uniHeightYARD = 0
     let uniWidthYARD = 0
-    const yardPrice = 4
+    const yardPrice = 4.3
     let price = 0
 
     if (arguments.length == 1) {

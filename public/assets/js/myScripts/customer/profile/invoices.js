@@ -46,7 +46,7 @@ var KTCustomerInvoicesList = function () {
                 { data: 'serialNumber' },
 
                 {
-                    data: 'InvoiceType',
+                    data: 'type',
                     render: function (data, type, doc) {
                         let span
                         switch (data) {

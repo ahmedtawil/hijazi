@@ -46,12 +46,12 @@ var KTCustomerPurchasesList = function () {
                 { data: 'serialNumber' },
   
                 {
-                    data: 'products.length', 
+                    data: 'items.length', 
                 },
                 {
-                    data: 'totalProductsPrice',
+                    data: 'totalAmount',
                     render: function (data, type, doc) {
-                        return `${data} شيكل`
+                        return `${data.toFixed(2)} شيكل`
 
                     }
 
@@ -66,9 +66,9 @@ var KTCustomerPurchasesList = function () {
                 },
 
                 {
-                    data: 'totalPrice',
+                    data: 'finalAmount',
                     render: function (data, type, doc) {
-                        return `${data} شيكل`
+                        return `${data.toFixed(2)} شيكل`
 
                     }
 
@@ -76,7 +76,7 @@ var KTCustomerPurchasesList = function () {
                 {
                     data: 'paidAmount',
                     render: function (data, type, doc) {
-                        return `${data} شيكل`
+                        return `${data.toFixed(2)} شيكل`
 
                     }
 
@@ -88,6 +88,30 @@ var KTCustomerPurchasesList = function () {
 
                     }
 
+                },
+                {
+                    data: 'status', 
+                    render: function (data, type, doc) {
+
+                        let span
+                        switch (data) {
+                            case 'pending':
+                                span = `<div class="badge badge-light-warning">معلقة</div>`
+                                break;
+                            case 'approved':
+                                span = `<div class="badge badge-light-primary">قيد التنفيذ</div>`
+                                break;
+                            case 'rejected':
+                                span = `<div class="badge badge-light-danger">مرفوضة</div>`
+                                break;
+                            case 'recived':
+                                span = `<div class="badge badge-light-success">تم التوصيل</div>`
+                                break;
+
+                        }
+                        return span
+
+                    }
                 },
 
                 {
